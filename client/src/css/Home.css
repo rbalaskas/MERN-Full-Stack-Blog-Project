@@ -1,0 +1,21 @@
+.home {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+    width: 100%;
+  }
+  
+  .home__banner {
+    width: 90%;
+    height: 40vh;
+    margin-bottom: 5rem;
+  }
+  
+  .home__banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the banner area */
+  }
+  

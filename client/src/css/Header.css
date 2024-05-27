@@ -1,0 +1,59 @@
+/* =============== NAVBAR ================== */
+
+nav {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  height: 6rem;
+  border-bottom: 4px solid var(--color-bg);
+}
+
+.nav__container {
+  width: 100%;
+  max-width: 1200px; /* or any width you prefer */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem; /* Add some padding to the container */
+}
+
+.nav__logo {
+  width: 3rem;
+  margin-top: 4rem;
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav__menu li {
+  display: inline;
+}
+
+.nav__toggle-btn {
+  display: none;
+}
+
+img {
+  display: block;
+  width: 12rem;
+  height: auto; /* Maintain aspect ratio */
+}
+
+a {
+  color: var(--color-gray-700);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
