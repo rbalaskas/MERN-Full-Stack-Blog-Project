@@ -4,6 +4,7 @@ import article1 from '../images/article1.jpg';
 import article2 from '../images/article2.jpg';
 import article3 from '../images/article3.jpg';
 import '../css/Authors.css'
+import '../index.css'
 
 const authorsData = [
   {

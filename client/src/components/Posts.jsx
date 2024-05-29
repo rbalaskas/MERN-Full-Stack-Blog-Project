@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PostItem from './PostItem';
 import '../css/Posts.css'
-
+import '../index.css'
 import { DUMMY_POSTS } from '../data';
 
 const Posts = () => {

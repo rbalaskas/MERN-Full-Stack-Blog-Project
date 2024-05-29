@@ -16,26 +16,32 @@
   --color-gray-500: hsl(220, 20%, 10%, 50%);
   --color-gray-700: #252542;
   --color-gray-900: #0c0c22;
-
   --color-bg: hwb(240 91% 2%);
-
   --transition: all 400ms ease;
-
   --container-width-lg: 84%;
   --container-width-md: 92%;
   --form-width: 50%;
-
   --radius-1: 0.3rem;
   --radius-2: 0.6rem;
   --radius-3: 1rem;
   --radius-4: 2rem;
 }
 
-body {
+html, body {
+  height: 100%;
   font-family: "Poppins", sans-serif;
   background: var(--color-bg);
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; /* This makes sure the main content takes up all available space */
+}
 
 
 h1, h2, h3, h4, h5, h6 {
@@ -111,4 +117,125 @@ h5 {
   background: var(--color-gray-900);
   color: var(--color-white);
 }
+
+
+
+
+
+
+/* ========================= MEDIA QUERIES (Small Devices) =======================*/
+
+
+@media screen and (max-width:800px){
+  h1{
+    font-size: 1.7rem;
+  }
+
+  h2{
+    font-size: 1.4rem;
+  }
+
+  h3{
+    font-size: 1.2rem;
+  }
+
+  .container{
+    width: var(--container-width-md);
+  }
+
+  /*======NAVBAR=====*/
+  .nav__container{
+    position: relative;
+    width:100%;
+  }
+
+  .nav__menu{
+    position: absolute;
+    top:10rem;
+    right: 1.3rem;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav__menu li{
+    width: 100%;
+    box-shadow: -2rem 4rem 4rem rgba(0,0,0, 0.26);
+    animation: dropDown 800ms ease forwards;
+    opacity: 0;
+    transform: rotateX(90deg);
+    transform-origin: top;
+  }
+
+  @keyframes dropDown {
+    to{
+      opacity: 1;
+      transform: rotateX(0);
+    }
+  }
+
+  .nav__menu li a{
+    display: block;
+    background: var(--color-white);
+    padding:0.85rem 2.5rem;
+  }
+
+  .nav__toggle-btn{
+    display: inline-block !important;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .posts__container{
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .footer__categories{
+    flex-direction: column;
+  }
+  
+
+  .post-detail{
+    width: 100% !important;
+    background: transparent !important;
+    padding:0 !important;
+  }
+
+  .post-detail h1{
+    margin-top: 1rem !important;
+  }
+
+  .register, .login, .create-post{
+    width:100% !important;
+  }
+
+  .form.profile__form{
+    margin-top: 2.5rem !important;
+    width: 100% !important;
+  }
+
+  .authors__container{
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+  }
+
+  .dashboard__post{
+    flex-direction: column !important;
+  }
+
+  .dashboard__post-info{
+    gap: 1.5rem !important;
+  }
+
+  .dashboard__post-thumbnail{
+    width: 5rem !important;
+  }
+  
+
+
+}
+
+
+
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import avatar from '../images/avatar1.jpg'
 import '../css/Posts.css'
+import '../index.css'
 
 const PostAuthor = () => {
   return (
