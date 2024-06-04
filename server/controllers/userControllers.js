@@ -12,41 +12,40 @@ const HttpError = require('../models/errorModel')
 /*================= Register a New User ================ */
 //post: api/users/register
 //unprotected
-const registerUser = async (req,res,next) =>{
-    try{
-        const {name, email, nickname, password, password2} = req.body;
-        if(!name || !email || !nickname || !password){
-            return next(new HttpError("All fields are required.",422));
-        }
-        const newEmail = email.toLowerCase()
+const registerUser = async (req, res, next) => {
+    try {
+        const { name, email, password, password2 } = req.body;
+        console.log(req.body);
 
-        const emailExists = await User.findOne({email: newEmail})
-        if(emailExists){
-            return next(new HttpError("Email already exist by other User.",422))
+        if (!name || !email || !password) {
+            return res.status(422).json({ message: "All fields are required." });
         }
 
-        if((password.trim()).length < 6){
-            return next(new HttpError("Password should be at least 6 characters.",422))
+        const newEmail = email.toLowerCase();
+
+        const emailExists = await User.findOne({ email: newEmail });
+        if (emailExists) {
+            return res.status(422).json({ message: "Email already exists for another user." });
         }
 
-        if((nickname.trim()).length < 3){
-            return next(new HttpError("Nickname should be at least 3 characters.",422))
+        if (password.trim().length < 6) {
+            return res.status(422).json({ message: "Password should be at least 6 characters." });
         }
 
-        if(password != password2){
-            return next(new HttpError("Password do not match with confirm password.",422))
+        if (password !== password2) {
+            return res.status(422).json({ message: "Password does not match with confirm password." });
         }
 
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(password, salt);
-        const newUser = await User.create({name, email: newEmail, nickname, password: hashedPass})
-        res.status(201).json(`New user ${newUser.email} registered successfully.`);
+        const newUser = await User.create({ name, email: newEmail, password: hashedPass });
 
+        res.status(201).json({ message: `New user ${newUser.email} registered successfully.` });
+    } catch (error) {
+        return res.status(500).json({ message: "An unexpected error occurred.", error: error.message });
     }
-    catch(error){
-        return next(new HttpError("User Registration Failed.",422));
-    }
-}
+};
+
 
 
 
@@ -86,12 +85,11 @@ const loginUser = async (req, res, next) => {
         res.status(200).json({
             userId: user.id,
             name: user.name,
-            nickname: user.nickname,
             token: token
         });
 
     } catch (error) {
-        return next(new HttpError("Login failed, please try again later.", 500));
+        return res.status(500).json({ message: "An unexpected error.", error: error.message });
     }
 }
 
@@ -174,8 +172,8 @@ const changeAvatar = async (req, res, next) => {
 //protected
 const editUser = async (req,res,next) =>{
     try{
-        const {name, email,nickname, currentPassword, newPassword, newConfirmPassword} = req.body;
-        if(!name || !email || !nickname ||!currentPassword || !newPassword){
+        const {name, email, currentPassword, newPassword, newConfirmPassword} = req.body;
+        if(!name || !email || !currentPassword || !newPassword){
             return next(new HttpError("All fields are required."),422);
         }
 
@@ -187,11 +185,6 @@ const editUser = async (req,res,next) =>{
         const emailExist = await User.findOne({email});
         if(emailExist && (emailExist._id != req.user.id)){
             return next(new HttpError("Email already exist."),422);
-        }
-
-        const nickNameExist = await User.findOne({nickname});
-        if(nickNameExist && (nickNameExist._id != req.user.id)){
-            return next(new HttpError("Nickname already exist."),422);
         }
     
         const validateUserPassword = await bcrypt.compare(currentPassword,user.password);
@@ -206,7 +199,7 @@ const editUser = async (req,res,next) =>{
         const salt= await bcrypt.genSalt(10);
         const Hash = await bcrypt.hash(newPassword, salt);
 
-        const newInfo = await User.findByIdAndUpdate(req.user.userId, {name, email, nickname, password: Hash}, {new:true})
+        const newInfo = await User.findByIdAndUpdate(req.user.userId, {name, email, password: Hash}, {new:true})
         res.status(200).json(newInfo);
 
     }
