@@ -34,7 +34,7 @@ const createPost = async (req,res,next) =>{
             return next(new HttpError(err))
         }
         else{
-            const newPost = await Post.create({title, category, description, thumbnail: newFilename, creator: req.user.id})
+            const newPost = await Post.create({title, category, description, thumbnail: newFilename, creator: req.user.userId})
             if(!newPost){
                 return next(new HttpError("Post could't be created"),422);
             }
@@ -61,7 +61,13 @@ const createPost = async (req,res,next) =>{
 //post: api/posts/
 //protected
 const getPosts = async (req,res,next) =>{
-    res.json("Get All Posts");
+    try{
+        const posts = await Post.find().sort({updatedAt: -1});
+        res.status(200).json(posts);
+    }
+    catch(error){
+        return next(new HttpError(error));
+    }
 }
 
 
@@ -72,7 +78,17 @@ const getPosts = async (req,res,next) =>{
 //GET: api/posts/:id
 //Unprotected
 const getPost = async (req,res,next) =>{
-    res.json("Get Single Post");
+    try{
+        const postId = req.params.id;
+        const post = await Post.findById(postId);
+        if(!post){
+            return next(new HttpError("Post not found"),404);
+        }
+        res.status(200).json(post);
+    }
+    catch(error){
+        return next(new HttpError(error));
+    }
 }
 
 
@@ -82,7 +98,15 @@ const getPost = async (req,res,next) =>{
 //GET: api/posts/categories/:category
 //Unprotected
 const getCatPosts = async (req,res,next) =>{
-    res.json("Get Posts by Category");
+    try{
+        const {category} = req.params;
+        const catPosts = await Post.find({category}).sort({createdAt: -1});
+        res.status(200).json(catPosts);
+
+    }
+    catch(error){
+        return next(new HttpError(error));
+    }
 }
 
 
@@ -92,7 +116,16 @@ const getCatPosts = async (req,res,next) =>{
 //get: api/posts/users/:id
 //Unprotected
 const getUserPosts = async (req,res,next) =>{
-    res.json("Get User Post");
+    try{
+        const {id} = req.params;
+        const posts = await Post.find({creator: id}).sort({createdAt: -1});
+        res.status(200).json(posts);
+
+
+    }
+    catch(error){
+        return next(new HttpError(error));
+    }
 }
 
 
@@ -102,7 +135,56 @@ const getUserPosts = async (req,res,next) =>{
 //patch: api/posts/:id
 //protected
 const editPost = async (req,res,next) =>{
-    res.json("Edit Post");
+    try{
+        let fileName;
+        let newFileName;
+        let updatedPost;
+        const postId = req.params.id;
+        let {title, category, description} = req.body;
+
+        if(!title || !category || description.length < 12){
+            return next(new HttpError("All fields are required, or check description length."),422);
+        }
+
+        if(req.user.userId == oldPost.creator){
+            if(!req.files){
+                updatedPost - await Post.findByIdAndUpdate(postId,{title,category,description}, {new:true});
+            }
+            else{
+                const oldPost = await Post.findById(postId);
+                fs.unlink(path.join(__dirname, '..', 'uploads',oldPost.thumbnail), async (err)=>{
+                    if(err){
+                        return next(new HttpError(err));
+                    }
+                })
+    
+                const {thumbnail} = req.files;
+    
+                if (thumbnail.size > 2000000){
+                    return next(new HttpError("Thumbnail too big. Should be less than 2MB."));
+                }
+                fileName = thumbnail.name;
+                let splittedFileName = fileName.split('.');
+                newFileName = splittedFileName[0] + uuid() + "." + splittedFileName[splittedFileName.length -1];
+                thumbnail.mv(path.join(__dirname, '..', 'uploads', newFileName), async(err)=> {
+                    if(err){
+                        return next(new HttpError(err));
+                    }
+                })
+    
+                updatedPost = await Post.findByIdAndUpdate(postId, {title,category, description, thumbnail:newFileName},
+                                                                {new:true})
+            }
+            res.status(200).json(updatedPost);
+        }
+        if(!updatedPost){
+            return next(new HttpError("Couldn't Update the Post."),422);
+        }
+        
+    }
+    catch(error){
+        return next(new HttpError(error));
+    }
 }
 
 
@@ -112,7 +194,35 @@ const editPost = async (req,res,next) =>{
 //delete: api/posts/:id
 //protected
 const deletePost = async (req,res,next) =>{
-    res.json("Delete Post");
+    try{
+
+        const postId = req.params.id;
+        if(!postId){
+            return next(new HttpError("Post Unavailable"),400);
+        }
+        const post = await Post.findById(postId);
+        const fileName = post?.thumbnail;
+        if(req.user.userId == post.creator){
+            fs.unlink(path.join(__dirname, '..','uploads',fileName),async (err)=> {
+                if(err){
+                    return next(new HttpError(err));
+                }
+                else{
+                    await Post.findByIdAndDelete(postId);
+                    const currentUser = await User.findById(req.user.userId);
+                    const userPostCount = currentUser?.posts - 1;
+                    await User.findByIdAndUpdate(req.user.userId, {posts:userPostCount});
+                }
+            })
+            res.json(`Post ${postId} deleted Successfully.`);
+        }
+        else{
+            return next(new HttpError("Post couldn't be deleted."),403);
+        }
+    }
+    catch(error){
+        return next(new HttpError(error));
+    }
 }
 
 module.exports = {createPost, getPosts, getPost, getCatPosts, getUserPosts, editPost, deletePost }
