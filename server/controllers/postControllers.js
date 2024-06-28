@@ -49,7 +49,7 @@ const createPost = async (req,res,next) =>{
 
    }
    catch(error){
-    return next(new HttpError(error),422)
+    return res.status(500).json({ message: "An unexpected error.", error: error.message });
    }
 }
 
@@ -134,58 +134,62 @@ const getUserPosts = async (req,res,next) =>{
 /*================= Edit Post ================ */
 //patch: api/posts/:id
 //protected
-const editPost = async (req,res,next) =>{
-    try{
+const editPost = async (req, res, next) => {
+    try {
         let fileName;
         let newFileName;
         let updatedPost;
         const postId = req.params.id;
-        let {title, category, description} = req.body;
+        let { title, category, description } = req.body;
 
-        if(!title || !category || description.length < 12){
-            return next(new HttpError("All fields are required, or check description length."),422);
+        if (!title || !category || description.length < 12) {
+            return next(new HttpError("All fields are required, or check description length."), 422);
         }
 
-        if(req.user.userId == oldPost.creator){
-            if(!req.files){
-                updatedPost - await Post.findByIdAndUpdate(postId,{title,category,description}, {new:true});
-            }
-            else{
-                const oldPost = await Post.findById(postId);
-                fs.unlink(path.join(__dirname, '..', 'uploads',oldPost.thumbnail), async (err)=>{
-                    if(err){
-                        return next(new HttpError(err));
-                    }
-                })
-    
-                const {thumbnail} = req.files;
-    
-                if (thumbnail.size > 2000000){
+        // Fetch the old post before using it
+        const oldPost = await Post.findById(postId);
+
+        if (req.user.userId == oldPost.creator) {
+            if (!req.files) {
+                updatedPost = await Post.findByIdAndUpdate(postId, { title, category, description }, { new: true });
+            } else {
+                if (oldPost) { // Check if oldPost exists
+                    fs.unlink(path.join(__dirname, '..', 'uploads', oldPost.thumbnail), async (err) => {
+                        if (err) {
+                            return next(new HttpError(err));
+                        }
+                    })
+                }
+
+                const { thumbnail } = req.files;
+
+                if (thumbnail.size > 2000000) {
                     return next(new HttpError("Thumbnail too big. Should be less than 2MB."));
                 }
                 fileName = thumbnail.name;
                 let splittedFileName = fileName.split('.');
-                newFileName = splittedFileName[0] + uuid() + "." + splittedFileName[splittedFileName.length -1];
-                thumbnail.mv(path.join(__dirname, '..', 'uploads', newFileName), async(err)=> {
-                    if(err){
+                newFileName = splittedFileName[0] + uuid() + "." + splittedFileName[splittedFileName.length - 1];
+                thumbnail.mv(path.join(__dirname, '..', 'uploads', newFileName), async (err) => {
+                    if (err) {
                         return next(new HttpError(err));
                     }
                 })
-    
-                updatedPost = await Post.findByIdAndUpdate(postId, {title,category, description, thumbnail:newFileName},
-                                                                {new:true})
+
+                updatedPost = await Post.findByIdAndUpdate(postId, { title, category, description, thumbnail: newFileName },
+                    { new: true })
             }
             res.status(200).json(updatedPost);
         }
-        if(!updatedPost){
-            return next(new HttpError("Couldn't Update the Post."),422);
+        if (!updatedPost) {
+            return next(new HttpError("Couldn't Update the Post."), 422);
         }
-        
+
     }
-    catch(error){
+    catch (error) {
         return next(new HttpError(error));
     }
 }
+
 
 
 

@@ -12,6 +12,7 @@ const Footer = () => {
         <li><Link to="/posts/categories/Paphos">Paphos</Link></li>
         <li><Link to="/posts/categories/Larnaca">Larnaca</Link></li>
         <li><Link to="/posts/categories/Ammochostos">Ammochostos</Link></li>
+        <li><Link to="/posts/categories/Cyprus">Cyprus</Link></li>
       </ul>
       <div className="footer__copyright">
         <small>All Rights Reserved &copy;, 2024 <a href="https://rbcoding.com" target="_blank" rel="noopener noreferrer">RB Coding</a>.</small>

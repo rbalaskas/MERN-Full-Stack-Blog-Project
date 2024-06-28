@@ -1,49 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import article1 from '../images/article1.jpg';
-import article2 from '../images/article2.jpg';
-import article3 from '../images/article3.jpg';
 import '../css/Authors.css'
 import '../index.css'
-
-const authorsData = [
-  {
-    id: 1,
-    avatar: article1,
-    name: "John Doe",
-    posts: 10
-  },
-  {
-    id: 2,
-    avatar: article2,
-    name: "Jane Smith",
-    posts: 3
-  },
-  {
-    id: 3,
-    avatar: article3,
-    name: "Emily Johnson",
-    posts: 11
-  },
-  {
-    id: 4,
-    avatar: article2,
-    name: "Michael Brown",
-    posts: 8
-  }
-];
+import axios from 'axios';
+import Loader from '../components/Loader'
 
 const Authors = () => {
-  const [authors, setAuthors] = useState(authorsData);
+  const [authors, setAuthors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getAuthors = async () => {
+      setIsLoading(true);
+      try{
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/users`)
+        setAuthors(response.data)
+      }
+      catch(error){
+        console.log(error);
+      }
+      setIsLoading(false);
+    }
+    
+    getAuthors()
+
+  }, [])
+
+  if(isLoading){
+    <Loader/>
+  }
+
 
   return (
     <section className="authors" style={{marginTop:"10rem",marginBottom:"5rem"}}>
       {authors.length > 0 ? (
         <div className="container authors__container">
-          {authors.map(({ id, avatar, name, posts }) => (
+          {authors.map(({_id: id, avatar, name, posts }) => (
             <Link to={`/posts/users/${id}`} key={id} className="author">
               <div className="author__avatar">
-                <img src={avatar} alt={`Image of ${name}`} />
+                <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`} alt={`Image of ${name}`} />
               </div>
               <div className="author__info">
                 <h4>{name}</h4>
