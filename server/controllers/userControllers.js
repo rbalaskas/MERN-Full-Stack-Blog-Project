@@ -178,41 +178,41 @@ const changeAvatar = async (req, res, next) => {
 /*================= Edit User User Details ================ */
 //post: api/users/edit-user
 //protected
-const editUser = async (req,res,next) =>{
-    try{
-        const {name, email, currentPassword, newPassword, newConfirmPassword} = req.body;
-        if(!name || !email || !currentPassword || !newPassword){
-            return next(new HttpError("All fields are required."),422);
+const editUser = async (req, res, next) => {
+    try {
+        const { name, email, currentPassword, newPassword, confirmNewPassword } = req.body;
+
+        // Validate input
+        if (!name || !email || !currentPassword || !newPassword) {
+            return next(new HttpError("All fields are required."), 422);
         }
 
         const user = await User.findById(req.user.userId);
-        console.log(user);
-        if(!user){
-            return next(new HttpError("User not found"),404);
-        }
-        const emailExist = await User.findOne({email});
-        if(emailExist && (emailExist._id != req.user.id)){
-            return next(new HttpError("Email already exist."),422);
-        }
-    
-        const validateUserPassword = await bcrypt.compare(currentPassword,user.password);
-        if(!validateUserPassword){
-            return next(new HttpError("Invalid current Password."),422);
+        if (!user) {
+            return next(new HttpError("User not found"), 404);
         }
 
-        if(newPassword !== newConfirmPassword){
-            return next(new HttpError("New Password do not match."),422);
+        const emailExist = await User.findOne({ email });
+        if (emailExist && (emailExist._id != req.user.id)) {
+            return next(new HttpError("Email already exists."), 422);
         }
 
-        const salt= await bcrypt.genSalt(10);
-        const Hash = await bcrypt.hash(newPassword, salt);
+        const validateUserPassword = await bcrypt.compare(currentPassword, user.password);
+        if (!validateUserPassword) {
+            return next(new HttpError("Invalid current Password."), 422);
+        }
 
-        const newInfo = await User.findByIdAndUpdate(req.user.userId, {name, email, password: Hash}, {new:true})
-        res.status(200).json(newInfo);
+        if (newPassword !== confirmNewPassword) {
+            return next(new HttpError("New Passwords do not match."), 422);
+        }
 
-    }
-    catch(error){
-        return next (new HttpError(error))
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        const updatedUser = await User.findByIdAndUpdate(req.user.userId, { name, email, password: hashedPassword }, { new: true });
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        return next(new HttpError(error.message, 500));
     }
 }
 

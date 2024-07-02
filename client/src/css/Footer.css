@@ -1,9 +1,12 @@
+/* Footer.css */
+
 footer {
   background-color: var(--color-gray-900);
   min-height: 20vh; /* Use min-height instead of height for flexibility */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centers the content vertically */
+  align-items: center; /* Centers items horizontally */
   width: 100%;
   padding: 1rem 0; /* Added padding to ensure content doesn't stick to the edges */
 }
@@ -28,6 +31,31 @@ footer {
 .footer__categories a:hover {
   background: var(--color-white);
   color: var(--color-gray-900);
+}
+
+.footer__advertise {
+  text-align: center;
+  margin-top: 1rem; /* Adjust top margin as needed */
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 150px;
+  height: 40px;
+  border-radius: var(--radius-2); /* Optional: Add border-radius for a rounded appearance */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for depth */
+}
+
+.footer__advertise a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer__advertise a:hover {
+  color: #6F6AF8; /* Change color on hover */
 }
 
 .footer__copyright {

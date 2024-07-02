@@ -14,8 +14,11 @@ const Footer = () => {
         <li><Link to="/posts/categories/Ammochostos">Ammochostos</Link></li>
         <li><Link to="/posts/categories/Cyprus">Cyprus</Link></li>
       </ul>
+      <div className="footer__advertise">
+        <Link to="/advertisment">Advertise With Us</Link>
+      </div>
       <div className="footer__copyright">
-        <small>All Rights Reserved &copy;, 2024 <a href="https://rbcoding.com" target="_blank" rel="noopener noreferrer">RB Coding</a>.</small>
+        <small>All Rights Reserved &copy; 2024 <a href="https://rbcoding.com" target="_blank" rel="noopener noreferrer">RB Coding</a>.</small>
       </div>
     </footer>
   );

@@ -1,0 +1,176 @@
+.advertisement-query-page {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px; /* Add padding to create space on the sides */
+  }
+  
+  .banner {
+    position: relative; /* Ensure button position is relative to the banner */
+    width: 100%;
+    height: 700px; /* Default height for desktop */
+    overflow: hidden; /* Ensures image doesn't overflow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .banner img {
+    width: 100%; /* Ensures image covers entire container */
+    height: auto; /* Maintains aspect ratio */
+    object-fit: cover; /* Ensures image covers entire container */
+  }
+  
+  .banner .btn {
+    position: absolute;
+    bottom: 80px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1; /* Ensure button appears above the image */
+    font-size: 25px;
+  }
+  
+  .banner .btn:hover {
+    background-color: #4f4f4f;
+  }
+  
+  @media (max-width: 768px) {
+    .banner {
+      height: 250px; /* Height for mobile devices */
+    }
+  }
+  
+  .advertised-businesses {
+    margin-top: 20px;
+  }
+  
+  .advertised-businesses h2 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centering the heading */
+  }
+  
+  .business-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc(33.33% - 60px), 1fr)); /* Three items per row with gap */
+    gap: 40px;
+    justify-items: center; /* Center items horizontally */
+    padding: 0 40px; /* Add padding to create space on the sides */
+  }
+  
+  .business-card {
+    width: 100%; /* Ensure each card takes full width of its container */
+    height: 300px; /* Fixed height for each business card */
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden; /* Ensure image doesn't overflow */
+    position: relative;
+  }
+  
+  .business-image {
+    width: 100%;
+    height: 80%; /* Adjust image height as needed */
+    object-fit: cover; /* Ensures image covers 80% of the container */
+  }
+  
+  .business-details {
+    padding: 10px;
+  }
+  
+  .business-title {
+    height: 20%; /* Adjust the height of the business title */
+    background-color: #ffffff; /* Background color for the title section */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem; /* Adjust font size as needed */
+    overflow: hidden; /* Ensure text overflow is hidden */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+    white-space: nowrap; /* Prevent wrapping */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .business-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .contact-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 40%; /* Centering form with 40% width */
+    margin: 80px auto; /* Adjust vertical margin as needed */
+  }
+  
+  .contact-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centering the form heading */
+  }
+  
+  .contact-form form {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .contact-form label {
+    font-weight: bold;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .contact-form button {
+    padding: 10px 20px;
+    background-color: #6F6AF8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .contact-form button:hover {
+    background-color: #4d4b98;
+  }
+  
+/* Advertisement.css */
+
+.error-message {
+  color: red;
+}
+
+.success-message {
+  color: green;
+}
+
+button[disabled] {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+/* Add any other styles you need */

@@ -45,7 +45,7 @@ const formats = [
   'link','image'
 ]
 
-const POST_CATEGORIES =['Nicosia', 'Limassol', 'Paphos','Larnaca','Ammochostos', 'Cyprus']
+const POST_CATEGORIES =['Uncategorized', 'Nicosia', 'Limassol', 'Paphos','Larnaca','Ammochostos', 'Cyprus']
 
   useEffect(() => {
     const getPost = async () => {
@@ -110,8 +110,9 @@ const POST_CATEGORIES =['Nicosia', 'Limassol', 'Paphos','Larnaca','Ammochostos',
             autoFocus
           />
           <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option value="Uncategorized">Uncategorized</option>
-            {/* Include other categories here */}
+            {
+              POST_CATEGORIES.map(cat => <option key={cat}>{cat}</option>)
+            }
           </select>
           <ReactQuill modules={module} formats={formats} value={description} onChange={setDescription} />
           <input type="file" onChange={(e) => setThumbnail(e.target.files[0])} accept="image/png, image/jpeg" />

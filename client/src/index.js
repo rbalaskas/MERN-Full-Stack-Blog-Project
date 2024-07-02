@@ -17,6 +17,7 @@ import EditPost from './pages/EditPost';
 import Logout from './pages/Logout';
 import DeletePost from './pages/DeletePost';
 import UserProvider from './context/userContext';
+import Advertisement from './pages/Advertisement';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,8 @@ const router = createBrowserRouter([
       {path: "posts/:id/edit", element:<EditPost/>},
       {path: "posts/:id/delete", element:<DeletePost/>},
       {path: "logout", element:<Logout/>},
-      {path: "register", element:<Register/>}
+      {path: "register", element:<Register/>},
+      {path: "advertisment", element:<Advertisement/>}
     ]
   }
 ])
