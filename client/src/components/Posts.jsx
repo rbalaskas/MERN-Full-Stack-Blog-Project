@@ -37,6 +37,7 @@ const Posts = () => {
                 description={description} authorID={creator} createdAt={createdAt}/>)
             }
         </div> : <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>No posts found!</h2>}
+
     </section>
   )
 }

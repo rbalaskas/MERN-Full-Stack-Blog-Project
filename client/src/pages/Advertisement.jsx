@@ -17,6 +17,7 @@ const Advertisement = () => {
   const [notification, setNotification] = useState({ message: '', type: '' });
   const [loading, setLoading] = useState(false); // Add loading state
   const formRef = useRef();
+  const contactFormRef = useRef(); // Ref for the contact form section
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -83,11 +84,17 @@ const Advertisement = () => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
+  const scrollToContactForm = () => {
+    if (contactFormRef.current) {
+      contactFormRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="advertisement-query-page" style={{ marginTop: "3.3rem" }}>
       <div className="banner">
         <img src={advertise} alt="Advertise Banner" />
-        <button className="btn primary">Learn More</button>
+        <button className="btn primary" onClick={scrollToContactForm}>Learn More</button>
       </div>
 
       <div className="advertised-businesses">
@@ -104,7 +111,7 @@ const Advertisement = () => {
         </div>
       </div>
 
-      <div className="contact-form">
+      <div className="contact-form" ref={contactFormRef}>
         <h3>Explore Advertising Opportunities</h3>
         <form ref={formRef} onSubmit={SendEmail}>
           <label htmlFor="businessName">Business Name:</label>

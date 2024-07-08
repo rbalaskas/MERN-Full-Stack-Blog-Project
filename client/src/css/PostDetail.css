@@ -1,28 +1,119 @@
-.post-detail{
-    width: var(--form-width);
-    background: var(--color-white);
-    margin-inline: auto;
-    padding: 2rem 0;
+.post-detail {
+  width: var(--form-width);
+  background: var(--color-white);
+  margin-inline: auto;
+  padding: 2rem 0;
 }
 
-.post-detail__header{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
+.post-detail__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
 
-.post-detail__buttons{
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+.post-detail__buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
-.post-detail__thumbnail img{
-    margin: 1rem 0;
-    max-height: 30rem;
+.post-detail__thumbnail img {
+  margin: 1rem 0;
+  max-height: 30rem;
+  width: 100%;
+}
+
+.post-detail p {
+  margin-bottom: 0.7rem;
+}
+
+.like-and-comment {
+  margin-top: 2rem;
+  margin-left: 3.5rem;
+}
+
+.like-share-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.like-button, .share-button, .submit-button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.comments-section {
+  margin-top: 2rem;
+}
+
+.comments-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.comments-list .comment-item {
+  padding: 1rem;
+  background-color: var(--color-light-grey);
+  border-radius: 5px;
+  word-wrap: break-word; /* Ensure words wrap if they are too long */
+}
+
+.comments-list .comment-item .comment-content {
+  margin-bottom: 0.5rem;
+  white-space: pre-wrap; /* Preserve whitespace and wrap text */
+  word-wrap: break-word; /* Ensure words wrap if they are too long */
+}
+
+.comments-list .comment-item .comment-metadata {
+  color: var(--color-grey);
+  font-size: 0.85rem;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 2px solid rgb(255, 173, 239);
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 1rem;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--color-grey);
+  border-radius: 5px;
+}
+
+.comment-form .submit-button {
+  align-self: flex-start;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .like-and-comment {
+    margin-left: 0;
+  }
+
+  .like-share-buttons {
+    flex-direction: column;
+  }
+
+  .comment-form {
     width: 100%;
-}
-
-.post-detail p{
-    margin-bottom: 0.7rem;
+  }
 }

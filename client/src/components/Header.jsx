@@ -30,7 +30,7 @@ const Header = () => {
                 <img src={logo} alt="Logo" />
             </Link>
             {currentUser?.userId && isNavShowing && <ul className="nav__menu">
-                <li><Link to="/profile/tester" onClick={closeNavHandler}>{currentUser?.name}</Link></li>
+                <li><Link to={`/profile/${currentUser.userId}`} onClick={closeNavHandler}>{currentUser?.name}</Link></li>
                 <li><Link to="/create" onClick={closeNavHandler}>Create Post</Link></li>
                 <li><Link to="/authors" onClick={closeNavHandler}>Authors</Link></li>
                 <li><Link to="/logout" onClick={closeNavHandler}>Logout</Link></li>
