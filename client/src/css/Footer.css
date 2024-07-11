@@ -24,7 +24,7 @@ footer {
   background: var(--color-gray-700);
   color: var(--color-white);
   padding: 0.6rem 1.4rem;
-  border-radius: var(--radius-2);
+  border-radius: 10px;
   transition: var(--transition);
 }
 
@@ -36,15 +36,12 @@ footer {
 .footer__advertise {
   text-align: center;
   margin-top: 1rem; /* Adjust top margin as needed */
-  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
-  width: 150px;
-  height: 40px;
-  border-radius: var(--radius-2); /* Optional: Add border-radius for a rounded appearance */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for depth */
+  width: auto; /* Adjust width based on content */
+  padding: 10px 20px; /* Adjust padding for better appearance */
 }
 
 .footer__advertise a {
@@ -52,6 +49,8 @@ footer {
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
+  padding-left:10px;
+  padding-right: 10px;
 }
 
 .footer__advertise a:hover {

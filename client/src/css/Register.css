@@ -42,6 +42,13 @@
     color: var(--color-primary);
 }
 
-
+.login__form .form__error-message {
+   color: #d9534f;
+   background-color: #f2dede;
+   border: 1px solid #ebccd1;
+   padding: 10px;
+   border-radius: 4px;
+   margin-bottom: 15px;
+ }
 
 

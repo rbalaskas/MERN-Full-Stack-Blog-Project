@@ -91,7 +91,7 @@ const Advertisement = () => {
   };
 
   return (
-    <div className="advertisement-query-page" style={{ marginTop: "3.3rem" }}>
+    <div className="advertisement-query-page" style={{marginTop:"7rem",marginBottom:"5rem"}}>
       <div className="banner">
         <img src={advertise} alt="Advertise Banner" />
         <button className="btn primary" onClick={scrollToContactForm}>Learn More</button>
@@ -109,7 +109,7 @@ const Advertisement = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div><br/><br/>
 
       <div className="contact-form" ref={contactFormRef}>
         <h3>Explore Advertising Opportunities</h3>

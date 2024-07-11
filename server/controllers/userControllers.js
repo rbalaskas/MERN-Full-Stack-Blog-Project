@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const path = require('path')
 const {v4: uuid} = require('uuid')
+const crypto = require('crypto');
 
-const User = require('../models/userModel')
-const HttpError = require('../models/errorModel')
-
-
+const User = require('../models/userModel');
+const HttpError = require('../models/errorModel');
+const sendEmail = require('../utils/sendEmail');
 
 /*================= Register a New User ================ */
 //post: api/users/register
@@ -17,7 +17,7 @@ const registerUser = async (req, res, next) => {
         const { name, email, password, password2 } = req.body;
         console.log(req.body);
 
-        if (!name || !email || !password) {
+        if (!name || !email || !password || !password2) {
             return res.status(422).json({ message: "All fields are required." });
         }
 
@@ -38,16 +38,27 @@ const registerUser = async (req, res, next) => {
 
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(password, salt);
-        const newUser = await User.create({ name, email: newEmail, password: hashedPass });
+        const verifyEmailToken = crypto.randomBytes(20).toString('hex'); 
 
-        res.status(201).json({ message: `New user ${newUser.email} registered successfully.` });
+        const newUser = await User.create({ 
+            name, 
+            email: newEmail, 
+            password: hashedPass, 
+            verifyEmailToken 
+        });
+
+        // Send verification email
+        const verifyLink = `${process.env.BASE_URL}/verify-email?token=${verifyEmailToken}`;
+        console.log('Verification link:', verifyLink);
+
+        await sendEmail(newUser.email, 'Email Verification', `Please verify your email by clicking the following link: ${verifyLink}`);
+
+        res.status(201).json({ message: `New user ${newUser.email} registered successfully. Please check your email to verify your account.` });
     } catch (error) {
+        console.error('Error during user registration:', error);
         return res.status(500).json({ message: "An unexpected error occurred.", error: error.message });
     }
 };
-
-
-
 
 
 /*================= Login a registered User ================ */
@@ -232,4 +243,32 @@ const getAuthors = async (req,res,next) =>{
 }
 
 
-module.exports = {registerUser,loginUser, getUser, changeAvatar, editUser, getAuthors}
+const verifyEmail = async (req, res, next) => {
+    try {
+        const { token } = req.query;
+
+        if (!token) {
+            console.log("Invalid or missing token.");
+            return res.status(400).json({ message: "Invalid or missing token." });
+        }
+
+        const user = await User.findOne({ verifyEmailToken: token });
+        console.log("Token received:", token);
+        console.log("User found:", user);
+
+        if (!user) {
+            console.log("Invalid or expired token.");
+            return res.status(400).json({ message: "Invalid or expired token." });
+        }
+
+        user.isVerified = true;
+        await user.save();
+
+        res.status(200).json({ message: "Email successfully verified." });
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        return res.status(500).json({ message: "An unexpected error occurred.", error: error.message });
+    }
+};
+
+module.exports = {registerUser, loginUser, getUser, changeAvatar, editUser, getAuthors, verifyEmail};

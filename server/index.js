@@ -6,7 +6,8 @@ const upload = require('express-fileupload')
 
 const userRoutes = require('./routes/userRoutes')
 const postRoutes = require('./routes/postRoutes')
-const commentRoutes = require('./routes/commentRoutes') // Import comment routes
+const commentRoutes = require('./routes/commentRoutes')
+const subscriberRoutes = require('./routes/subscriberRoutes')
 const {notFound, errorHandler} = require('./middleware/errorMiddleware')
 
 const app = express()
@@ -18,8 +19,8 @@ app.use('/uploads',express.static(__dirname + '/uploads'))
 
 app.use('/api/users', userRoutes)
 app.use('/api/posts', postRoutes)
-app.use('/api/comments', commentRoutes) // Use comment routes
-
+app.use('/api/comments', commentRoutes)
+app.use('/api/subscribers', subscriberRoutes)
 app.use(notFound)
 app.use(errorHandler)
 

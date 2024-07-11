@@ -51,9 +51,6 @@ const Register = () => {
 };
 
 
-
-
-
   return (
     <section className="register" style={{marginTop:"10rem",marginBottom:"5rem"}}>
       <div className="container">

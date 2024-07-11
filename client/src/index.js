@@ -18,6 +18,9 @@ import Logout from './pages/Logout';
 import DeletePost from './pages/DeletePost';
 import UserProvider from './context/userContext';
 import Advertisement from './pages/Advertisement';
+import FAQ from './pages/FAQ';
+import Support from './pages/Support';
+import VerifyEmailComponent from './pages/VerifyEmailComponent';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +42,10 @@ const router = createBrowserRouter([
       {path: "posts/:id/delete", element:<DeletePost/>},
       {path: "logout", element:<Logout/>},
       {path: "register", element:<Register/>},
-      {path: "advertisment", element:<Advertisement/>}
+      {path: "advertisment", element:<Advertisement/>},
+      {path: "FAQ", element:<FAQ/>},
+      {path: "Support", element:<Support/>},
+      {path: "verify-email", element:<VerifyEmailComponent/>}
     ]
   }
 ])
