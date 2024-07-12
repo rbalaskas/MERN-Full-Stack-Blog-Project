@@ -44,7 +44,7 @@ const Login = () => {
       <div className="container">
         <h2>Sign in</h2>
         <form className="form login__form" onSubmit={loginUser}>
-          {error && <p className="form__error-message">{error}</p>}
+          {error && <p className={`form__error-message ${error ? 'verify-email-error' : ''}`}>{error}</p>}
           <input type="email" placeholder='Email' name='email' value={userData.email} onChange={changeInputHandler} autoFocus/>
           <input type="password" placeholder='Password' name='password' value={userData.password} onChange={changeInputHandler} />
           <button type="submit" className='btn primary'>Sign in</button>
