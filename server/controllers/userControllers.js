@@ -15,9 +15,8 @@ const sendEmail = require('../utils/sendEmail');
 const registerUser = async (req, res, next) => {
     try {
         const { name, email, password, password2 } = req.body;
-        console.log(req.body);
 
-        if (!name || !email || !password || !password2) {
+        if (!name || !email || !password) {
             return res.status(422).json({ message: "All fields are required." });
         }
 
@@ -38,53 +37,78 @@ const registerUser = async (req, res, next) => {
 
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(password, salt);
-        const verifyEmailToken = crypto.randomBytes(20).toString('hex'); 
+        const verifyEmailToken = crypto.randomBytes(20).toString('hex');
 
-        const newUser = await User.create({ 
-            name, 
-            email: newEmail, 
-            password: hashedPass, 
-            verifyEmailToken 
+        const newUser = await User.create({
+            name,
+            email: newEmail,
+            password: hashedPass,
+            verifyEmailToken
         });
 
         // Send verification email
         const verifyLink = `${process.env.BASE_URL}/verify-email?token=${verifyEmailToken}`;
-        console.log('Verification link:', verifyLink);
+        
+        // Prepare HTML content for the email
+        const htmlContent = `
+        <div style="font-family: Arial, sans-serif; color: #333; text-align: center;">
+            <div style="padding: 20px;">
+                <img src="${process.env.BASE_URL}/images/O%20koutsompolis.png" alt="O Koutsompolis Logo" style="width: 150px; height: auto; margin-bottom: 20px;">
+            </div>
+            <h2 style="color: #2a9d8f;">Email Verification</h2>
+            <p style="font-size: 16px;">Hello <strong>${name}</strong>,</p>
+            <p style="font-size: 16px;">
+                Thank you for registering. Please verify your email by clicking the link below:
+            </p>
+            <p style="text-align: center; margin-bottom: 20px;">
+                <a href="${verifyLink}" style="background-color: #2a9d8f; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                Verify Email
+                </a>
+            </p>
+            <p style="font-size: 16px;">If you did not create an account, please ignore this email or contact support.</p>
+            <p style="font-size: 16px;">Best regards,<br>O Koutsompolis</p>
+            <hr style="margin: 20px 0;">
+            <p style="font-size: 14px; color: #777;">
+                Need help? <a href="${process.env.BASE_URL}/support" style="color: #2a9d8f;">Contact our support team</a>.
+            </p>
+        </div>
+        `;
 
-        await sendEmail(newUser.email, 'Email Verification', `Please verify your email by clicking the following link: ${verifyLink}`);
+        // Send the email using your email sending function
+        await sendEmail(newEmail, 'Email Verification', htmlContent);
 
         res.status(201).json({ message: `New user ${newUser.email} registered successfully. Please check your email to verify your account.` });
     } catch (error) {
-        console.error('Error during user registration:', error);
         return res.status(500).json({ message: "An unexpected error occurred.", error: error.message });
     }
 };
 
 
-/*================= Login a registered User ================ */
-//post: api/users/login
-//unprotected
+
+
 const loginUser = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return next(new HttpError("All fields are required.", 422));
+            return res.status(422).json({ message: "All fields are required." });
         }
         const newEmail = email.toLowerCase();
 
-        // Use a different variable name to store the result of User.findOne
         const user = await User.findOne({ email: newEmail });
 
-        console.log(user);
         if (!user) {
-            return next(new HttpError("Invalid credentials, could not log you in.", 401));
+            return res.status(401).json({ message: "Invalid credentials, could not log you in." });
+        }
+
+        if (!user.isVerified) {
+            return res.status(401).json({ message: "Please verify your email before logging in." });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
-            return next(new HttpError("Invalid credentials, could not log you in.", 401));
+            return res.status(401).json({ message: "Invalid credentials, could not log you in." });
         }
 
         const token = jwt.sign(
@@ -100,7 +124,7 @@ const loginUser = async (req, res, next) => {
         });
 
     } catch (error) {
-        return res.status(500).json({ message: "An unexpected error.", error: error.message });
+        return res.status(500).json({ message: "An unexpected error occurred.", error: error.message });
     }
 }
 
