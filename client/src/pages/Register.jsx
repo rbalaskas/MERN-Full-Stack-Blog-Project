@@ -13,6 +13,7 @@ const Register = () => {
   });
 
   const [error, setError] = useState('');
+  const [agreed, setAgreed] = useState(false); // Add state for checkbox
   const navigate = useNavigate();
 
   const changeInputHandler = (e) => {
@@ -24,6 +25,12 @@ const Register = () => {
   const registerUser = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (!agreed) { // Check if user agreed to terms and conditions
+      setError('You must agree to the terms and conditions.');
+      return;
+    }
+
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, userData);
       const newUser = response.data;
@@ -56,6 +63,10 @@ const Register = () => {
           <input type="email" placeholder='Email' name='email' value={userData.email} onChange={changeInputHandler} />
           <input type="password" placeholder='Password' name='password' value={userData.password} onChange={changeInputHandler} />
           <input type="password" placeholder='Confirm Password' name='password2' value={userData.password2} onChange={changeInputHandler} />
+          <label className="terms-checkbox">
+          I agree to the <Link to="/termsandconditions" className="terms-link">Terms and Conditions</Link>
+            <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
+          </label>
           <button type="submit" className='btn primary'>Sign up</button>
         </form>
         <small>Already have an account? <Link to='/login'>Sign in</Link></small>

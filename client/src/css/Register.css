@@ -63,4 +63,42 @@
    border: 1px solid #f5c6cb;
  }
  
+ .terms-checkbox {
+   display: inline-block;
+   align-items: center;
+   margin-bottom: 1rem;
+   justify-content: center; /* Center the checkbox and text */
+   font-size: 10px;
+ }
+ 
+ .terms-checkbox input {
+   display: block;
+   margin-left: -6.5rem;
+   margin-top: -1rem;
+ }
+ 
+ .terms-link {
+   color: rgb(255, 137, 233);
+   text-decoration: none;
+ }
+ 
+ .terms-link:hover {
+   text-decoration: underline;
+ }
+ 
+ @media only screen and (max-width: 600px) {
+   .terms-checkbox {
+      display: inline-block;
+      align-items: center;
+      margin-bottom: 1rem;
+      justify-content: center; /* Center the checkbox and text */
+      font-size: 10px;
+    }
+    
+    .terms-checkbox input {
+      display: block;
+      margin-left: 2rem;
+      margin-top: -1rem;
+    }
+ }
 

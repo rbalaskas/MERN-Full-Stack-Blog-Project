@@ -1,16 +1,16 @@
-const {Router} = require('express')
+const { Router } = require('express');
+const { createPost, getPosts, getPost, getCatPosts, getUserPosts, editPost, deletePost, getPopularPosts } = require('../controllers/postControllers');
+const authMiddleware = require('../middleware/authMiddleware');
 
-const {createPost, getPosts, getPost, getCatPosts, getUserPosts, editPost, deletePost, removeEventListener } = require('../controllers/postControllers')
+const router = Router();
 
-const authMiddleware = require('../middleware/authMiddleware')
+router.post('/', authMiddleware, createPost);
+router.get('/', getPosts);
+router.get('/popular', getPopularPosts);
+router.get('/:id', getPost);
+router.get('/categories/:category', getCatPosts);
+router.patch('/:id', authMiddleware, editPost);
+router.get('/users/:id', getUserPosts);
+router.delete('/:id', authMiddleware, deletePost);
 
-const router = Router()
-
-router.post('/', authMiddleware, createPost)
-router.get('/', getPosts)
-router.get('/:id', getPost)
-router.get('/categories/:category', getCatPosts)
-router.patch('/:id', authMiddleware, editPost)
-router.get('/users/:id', getUserPosts)
-router.delete('/:id', authMiddleware, deletePost)
-module.exports = router
+module.exports = router;

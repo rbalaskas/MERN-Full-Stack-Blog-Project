@@ -14,7 +14,7 @@ const Posts = () => {
         setIsLoading(true);
         try {
           const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts`);
-          setPosts(response?.data.slice(0, 9));
+          setPosts(response?.data.slice(0, 6));
         } catch (error) {
           console.log(error);
         }

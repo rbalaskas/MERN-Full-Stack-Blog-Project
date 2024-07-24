@@ -21,6 +21,7 @@ import Advertisement from './pages/Advertisement';
 import FAQ from './pages/FAQ';
 import Support from './pages/Support';
 import VerifyEmailComponent from './pages/VerifyEmailComponent';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,8 @@ const router = createBrowserRouter([
       {path: "advertisment", element:<Advertisement/>},
       {path: "FAQ", element:<FAQ/>},
       {path: "Support", element:<Support/>},
-      {path: "verify-email", element:<VerifyEmailComponent/>}
+      {path: "verify-email", element:<VerifyEmailComponent/>},
+      {path: "termsandconditions", element:<TermsAndConditions/>}
     ]
   }
 ])

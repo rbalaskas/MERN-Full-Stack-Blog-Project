@@ -16,7 +16,7 @@
   --color-gray-500: hsl(220, 20%, 10%, 50%);
   --color-gray-700: #252542;
   --color-gray-900: #0c0c22;
-  --color-bg: hwb(240 91% 2%);
+  --color-bg: #e8e8fa;
   --transition: all 400ms ease;
   --container-width-lg: 84%;
   --container-width-md: 92%;

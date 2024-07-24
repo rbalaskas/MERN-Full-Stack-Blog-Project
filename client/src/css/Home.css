@@ -2,20 +2,50 @@
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: center;
-    margin-top: 10rem;
+    margin-top: 6rem;
     margin-bottom: 5rem;
     width: 100%;
   }
   
   .home__banner {
-    width: 90%;
-    height: 40vh;
+    width: 95%;
+    height: auto;
     margin-bottom: 5rem;
+    display: flex; /* Added to center the image */
+    justify-content: center; /* Added to center the image */
   }
   
   .home__banner img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the banner area */
+    height: auto;
+    object-fit: contain; /* Ensures the image fits within the banner area */
+  }
+  
+  .home__section-title {
+    width: 100%; /* Make sure it takes up the full width of the container */
+    margin-top: 2rem; /* Adjust top margin */
+    margin-bottom: 1rem; /* Adjust bottom margin */
+    text-align: left; /* Align text to the left */
+    font-size: 1.5em; /* Adjust font size */
+    color: #333; /* Adjust color as needed */
+    padding-left: 40px; /* Optional: Add padding to the left for spacing */
+  }
+  
+  
+  @media only screen and (max-width: 600px) {
+    .home__banner {
+      width: 95%;
+      height: 350px;
+      margin-bottom: 5rem;
+      display: flex; /* Added to center the image */
+      justify-content: center; /* Added to center the image */
+    }
+    
+    .home__banner img {
+      width: 100%;
+      height: 100%; /* Update to height: 350px; for consistent height */
+      object-fit: cover; /* Ensures the image covers the banner area */
+      zoom: -25%;
+    }
   }
   

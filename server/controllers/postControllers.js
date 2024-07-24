@@ -229,4 +229,32 @@ const deletePost = async (req,res,next) =>{
     }
 }
 
-module.exports = {createPost, getPosts, getPost, getCatPosts, getUserPosts, editPost, deletePost }
+
+/*================= Get Popular Post ================ */
+//get: api/posts
+//protected
+const getPopularPosts = async (req, res) => {
+    try {
+      const popularPosts = await Post.aggregate([
+        {
+          $addFields: {
+            totalEngagement: {
+              $add: [{ $size: "$comments" }, "$likes"]
+            }
+          }
+        },
+        {
+          $sort: { totalEngagement: -1 }
+        },
+        {
+          $limit: 3
+        }
+      ]).exec();
+  
+      res.status(200).json(popularPosts);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch popular posts' });
+    }
+  };
+
+module.exports = {createPost, getPosts, getPost, getCatPosts, getUserPosts, editPost, deletePost, getPopularPosts }
