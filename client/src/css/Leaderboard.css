@@ -1,0 +1,200 @@
+/* Base styles for the leaderboard */
+.leaderboard {
+  margin: 3rem 0;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.leaderboard th,
+.leaderboard td {
+  padding: 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle; /* Ensure vertical alignment is middle */
+}
+
+.leaderboard th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.even-row {
+  background-color: #c1c1c1;
+}
+
+.odd-row {
+  background-color: #ffffff;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.fa-icon {
+  margin-right: 5px;
+}
+
+/* Place styling */
+.place {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  margin-left: 1.3rem;
+}
+
+.place-1 {
+  background-color: gold;
+  color: black;
+}
+
+.place-2 {
+  background-color: silver;
+  color: black;
+}
+
+.place-3 {
+  background-color: #cd7f32; /* Bronze color */
+  color: black;
+}
+
+.place-4, .place-5, .place-6, .place-7, .place-8, .place-9, .place-10 {
+  background-color: black;
+  color: white;
+}
+
+/* Expandable Row Styles */
+.details-row {
+  display: none;
+}
+
+.details-cell {
+  padding: 1.5rem;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+.details-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-content p {
+  margin: 0;
+}
+
+
+/* Responsive Styles for Tablets and Phones */
+@media (max-width: 768px) {
+  .leaderboard {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .leaderboard table,
+  .leaderboard th,
+  .leaderboard td {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .leaderboard th:nth-child(n+4),
+  .leaderboard td:nth-child(n+4) {
+    display: none;
+  }
+
+  .leaderboard th:first-child,
+  .leaderboard td:first-child {
+    text-align: center;
+  }
+
+  .leaderboard th:nth-child(2),
+  .leaderboard td:nth-child(2) {
+    text-align: center;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    margin-left: 1.7rem;
+  }
+
+  .place {
+    margin-bottom: 1.5rem;
+    margin-left: 1.7rem;
+  }
+
+  /* Display additional details on mobile */
+  .details-row {
+    display: table-row;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .leaderboard {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .leaderboard th,
+  .leaderboard td {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .leaderboard th:nth-child(n+4),
+  .leaderboard td:nth-child(n+4) {
+    display: none;
+  }
+
+  .leaderboard th:first-child,
+  .leaderboard td:first-child {
+    text-align: center;
+  }
+
+  .leaderboard th:nth-child(2),
+  .leaderboard td:nth-child(2) {
+    text-align: center;
+  }
+
+  .avatar {
+    width: 35px;
+    height: 35px;
+    margin-left: 1.5rem;
+  }
+
+  .place {
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+  }
+
+  /* Display total points and posts on tablets */
+  .details-row {
+    display: table-row;
+  }
+
+  .details-content {
+    display: flex;
+    flex-direction: column;
+  }
+}

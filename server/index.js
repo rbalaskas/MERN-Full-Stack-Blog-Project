@@ -10,6 +10,9 @@ const commentRoutes = require('./routes/commentRoutes')
 const subscriberRoutes = require('./routes/subscriberRoutes')
 const {notFound, errorHandler} = require('./middleware/errorMiddleware')
 
+// Import Scheduler
+require('./utils/scheduler');
+
 const app = express()
 app.use(express.json({extended:true}))
 app.use(express.urlencoded({extended: true}))

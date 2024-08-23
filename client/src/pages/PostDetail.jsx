@@ -19,6 +19,7 @@ const PostDetail = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+  const [commentSubmitted, setCommentSubmitted] = useState(false);
   const token = currentUser?.token;
 
   useEffect(() => {
@@ -28,7 +29,6 @@ const PostDetail = () => {
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${id}`);
         setPost(response.data);
         setLikes(response.data.likes || 0);
-        setComments(response.data.comments || []);
       } catch (error) {
         console.error(error);
         setError(true);
@@ -36,7 +36,32 @@ const PostDetail = () => {
       setIsLoading(false);
     };
 
-    const getComments = async () => {
+    getPost();
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  useEffect(() => {
+    const fetchLikeStatus = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${id}/like`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setIsLiked(response.data.isLiked);
+        setLikes(response.data.likesCount);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (token) {
+      fetchLikeStatus();
+    }
+  }, [id, token]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/comments/${id}`);
         const commentsWithUserNames = await Promise.all(
@@ -69,31 +94,8 @@ const PostDetail = () => {
       }
     };
 
-    getPost();
-    getComments();
-
-    window.scrollTo(0, 0);
-  }, [id]);
-
-  useEffect(() => {
-    const fetchLikeStatus = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${id}/like`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setIsLiked(response.data.isLiked);
-        setLikes(response.data.likesCount);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (token) {
-      fetchLikeStatus();
-    }
-  }, [id, token]);
+    fetchComments();
+  }, [id, commentSubmitted]);
 
   const handleLike = async () => {
     try {
@@ -102,21 +104,25 @@ const PostDetail = () => {
         {},
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
+  
       setLikes(response.data.likes);
       setIsLiked(response.data.isLiked);
     } catch (error) {
-      console.error(error);
+      console.error("Error while liking the post:", error);
     }
   };
+  
+  
+  
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/comments/${id}`, {
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/comments/${id}`, {
         content: newComment,
         creator: currentUser.id,
       }, {
@@ -124,16 +130,9 @@ const PostDetail = () => {
           Authorization: `Bearer ${token}`
         }
       });
-      const userResponse = await axios.get(`${process.env.REACT_APP_BASE_URL}/users/${currentUser.userId}`);
-      const user = userResponse.data;
-      const formattedComment = {
-        ...response.data,
-        userName: user.name,
-        createdAt: isValid(new Date(response.data.createdAt))
-          ? format(new Date(response.data.createdAt), 'd/M/yyyy, h:mm:ss a')
-          : 'Invalid Date'
-      };
-      setComments([...comments, formattedComment]);
+
+      setCommentSubmitted(prev => !prev);
+
       setNewComment('');
     } catch (error) {
       console.error(error);
@@ -201,6 +200,7 @@ const PostDetail = () => {
               placeholder="Add a comment..."
               rows="3"
               required
+              maxlength="300"
             ></textarea>
             <button type="submit" className="btn submit-button">
               Submit

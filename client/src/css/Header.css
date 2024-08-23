@@ -8,7 +8,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
   height: 6rem;
@@ -17,16 +17,16 @@ nav {
 
 .nav__container {
   width: 100%;
-  max-width: 1200px; /* or any width you prefer */
+  max-width: 1200px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Ensures the logo is on the left and the menu is on the right */
   align-items: center;
   padding: 0 1rem; /* Add some padding to the container */
 }
 
 .nav__logo {
-  margin-top:-2rem;
-  width: 180px;
+  margin-top: -2rem;
+  width: 130px;
   height: 50px;
 }
 
@@ -57,4 +57,31 @@ a {
 
 ul {
   list-style: none;
+}
+
+/* Media query for mobile view */
+@media (max-width: 800px) {
+  .nav__menu {
+    position: absolute;
+    top: 6rem;
+    right: 1rem;
+    background: white;
+    flex-direction: column;
+    width: auto;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    gap: 1rem;
+  }
+
+  .nav__toggle-btn {
+    display: inline-block;
+  }
+
+  .nav__container {
+    justify-content: space-between;
+  }
+
+  .nav__logo {
+    margin-top: 0; /* Adjust for mobile */
+  }
 }

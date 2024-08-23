@@ -22,14 +22,28 @@
   }
   
   .home__section-title {
-    width: 100%; /* Make sure it takes up the full width of the container */
-    margin-top: 2rem; /* Adjust top margin */
-    margin-bottom: 1rem; /* Adjust bottom margin */
-    text-align: left; /* Align text to the left */
-    font-size: 1.5em; /* Adjust font size */
-    color: #333; /* Adjust color as needed */
-    padding-left: 40px; /* Optional: Add padding to the left for spacing */
-  }
+    position: relative;
+    display: inline-block;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+    color: #333;
+    z-index: 1;
+    padding: 0 10px;
+}
+
+.home__section-title::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, #F2D0F2, #ff96ff); /* Your gradient or image */
+    width: 130%; /* Increase the width to make it bigger */
+    height: 2.5rem; /* Increase the height to make it bigger */
+    z-index: -1;
+    border-radius: 10px;
+}
   
   
   @media only screen and (max-width: 600px) {

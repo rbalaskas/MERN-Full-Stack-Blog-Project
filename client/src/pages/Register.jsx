@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../css/Register.css';
 import '../index.css';
@@ -13,20 +13,36 @@ const Register = () => {
   });
 
   const [error, setError] = useState('');
-  const [agreed, setAgreed] = useState(false); // Add state for checkbox
+  const [agreed, setAgreed] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top when the component mounts
+
+    const savedUserData = JSON.parse(localStorage.getItem('userData'));
+    const savedAgreed = JSON.parse(localStorage.getItem('agreed'));
+    if (savedUserData) {
+      setUserData(savedUserData);
+    }
+    if (savedAgreed) {
+      setAgreed(savedAgreed);
+    }
+  }, []);
+
   const changeInputHandler = (e) => {
-    setUserData(prevState => {
-      return { ...prevState, [e.target.name]: e.target.value }
-    });
+    const updatedUserData = {
+      ...userData,
+      [e.target.name]: e.target.value
+    };
+    setUserData(updatedUserData);
+    localStorage.setItem('userData', JSON.stringify(updatedUserData));
   };
 
   const registerUser = async (e) => {
     e.preventDefault();
     setError('');
 
-    if (!agreed) { // Check if user agreed to terms and conditions
+    if (!agreed) {
       setError('You must agree to the terms and conditions.');
       return;
     }
@@ -38,19 +54,25 @@ const Register = () => {
       if (!newUser) {
         setError("Something went wrong. Please try again.");
       } else {
-        // Handle success message here if needed
-        console.log(newUser.message); // This should log the success message
+        console.log(newUser.message);
       }
 
+      localStorage.removeItem('userData');
+      localStorage.removeItem('agreed');
       navigate('/');
     } catch (error) {
-      console.error("Error:", error); // Log the full error for debugging
+      console.error("Error:", error);
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
     }
+  };
+
+  const handleCheckboxChange = (e) => {
+    setAgreed(e.target.checked);
+    localStorage.setItem('agreed', JSON.stringify(e.target.checked));
   };
 
   return (
@@ -64,8 +86,8 @@ const Register = () => {
           <input type="password" placeholder='Password' name='password' value={userData.password} onChange={changeInputHandler} />
           <input type="password" placeholder='Confirm Password' name='password2' value={userData.password2} onChange={changeInputHandler} />
           <label className="terms-checkbox">
-          I agree to the <Link to="/termsandconditions" className="terms-link">Terms and Conditions</Link>
-            <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
+            I agree to the <Link to="/termsandconditions" className="terms-link">Terms and Conditions</Link>
+            <input type="checkbox" checked={agreed} onChange={handleCheckboxChange} />
           </label>
           <button type="submit" className='btn primary'>Sign up</button>
         </form>

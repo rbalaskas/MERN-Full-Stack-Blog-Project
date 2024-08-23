@@ -1,8 +1,9 @@
+/* Base Styles */
 .post-detail {
   width: var(--form-width);
   background: var(--color-white);
   margin-inline: auto;
-  padding: 2rem 0;
+  padding: 2rem;
 }
 
 .post-detail__header {
@@ -29,16 +30,27 @@
 
 .like-and-comment {
   margin-top: 2rem;
-  margin-left: 3.5rem;
 }
 
 .like-share-buttons {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+  margin-left: 2rem; /* Default margin for desktop */
 }
 
-.like-button, .share-button, .submit-button {
+.like-button, .share-button{
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.submit-button {
   background-color: var(--color-primary);
   color: white;
   border: none;
@@ -50,12 +62,14 @@
 
 .comments-section {
   margin-top: 2rem;
+  margin-left: 2rem;
 }
 
 .comments-section h3 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
   color: var(--color-primary);
+  margin-left: 0.5rem;
 }
 
 .comments-list {
@@ -65,16 +79,16 @@
 }
 
 .comments-list .comment-item {
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: var(--color-light-grey);
   border-radius: 5px;
-  word-wrap: break-word; /* Ensure words wrap if they are too long */
+  word-wrap: break-word;
 }
 
 .comments-list .comment-item .comment-content {
   margin-bottom: 0.5rem;
-  white-space: pre-wrap; /* Preserve whitespace and wrap text */
-  word-wrap: break-word; /* Ensure words wrap if they are too long */
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .comments-list .comment-item .comment-metadata {
@@ -86,34 +100,111 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border: 2px solid rgb(255, 173, 239);
+  border-top: 2px solid rgb(255, 173, 239);
   border-radius: 10px;
-  width: 80%;
-  margin-left: 1rem;
+  width: 100%;
 }
+
 
 .comment-form textarea {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid var(--color-grey);
   border-radius: 5px;
+  height: 80px;
 }
 
-.comment-form .submit-button {
+.submit-button {
   align-self: flex-start;
+  margin-top: -1rem;
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
+.comment-form {
+  align-self: flex-start;
+  margin-top: -1rem;
+  width: 90%;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .post-detail {
+    padding: 1.5rem 1rem;
+  }
+
+  .post-detail__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .post-detail__buttons {
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+
   .like-and-comment {
     margin-left: 0;
   }
 
   .like-share-buttons {
-    flex-direction: column;
+    flex-direction: row; /* Align buttons in a row */
+    gap: 1rem;
+    align-items: center;
+    margin-left: 1rem; /* Margin for tablet */
   }
 
   .comment-form {
     width: 100%;
+    margin-top: 1rem;
+  }
+
+  .comments-section {
+    margin-left: 1rem; /* Margin for tablet */
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .post-detail {
+    padding: 1rem 0.5rem;
+  }
+
+  .post-detail__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .post-detail__buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .post-detail__thumbnail img {
+    max-height: 20rem;
+  }
+
+  .like-and-comment {
+    margin-left: 0;
+  }
+
+  .like-share-buttons {
+    flex-direction: row; /* Align buttons in a row */
+    gap: 1rem;
+    align-items: center;
+    margin-left: 1.5rem; /* Margin for mobile */
+  }
+
+  .comments-section {
+    margin-left: 0.8rem; /* Margin for mobile */
+    margin-top: 1.5rem;
+  }
+
+  .comments-section h3 {
+    margin-left: 0.8rem; /* Margin for comments title on mobile */
+  }
+
+  .comment-form {
+    width: 100%;
+    margin-top: 1rem;
   }
 }

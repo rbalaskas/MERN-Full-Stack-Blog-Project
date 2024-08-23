@@ -295,4 +295,20 @@ const verifyEmail = async (req, res, next) => {
     }
 };
 
-module.exports = {registerUser, loginUser, getUser, changeAvatar, editUser, getAuthors, verifyEmail};
+
+
+const { getLeaderboard } = require('../utils/scheduler');
+console.log('Imported getLeaderboard function:', getLeaderboard);
+const getTopContributors = (req, res) => {
+  try {
+    const leaderboard = getLeaderboard();
+    res.json(leaderboard);
+  } catch (error) {
+    console.error('Error fetching top contributors from cache:', error);
+    res.status(500).json({ message: 'Error fetching top contributors' });
+  }
+};
+
+
+
+module.exports = {registerUser, loginUser, getUser, changeAvatar, editUser, getAuthors, verifyEmail, getTopContributors};

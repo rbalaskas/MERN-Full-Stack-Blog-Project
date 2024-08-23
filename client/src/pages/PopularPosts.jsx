@@ -22,6 +22,15 @@ const PopularPosts = () => {
     fetchPopularPosts();
   }, []);
 
+  const handleTitleClick = async (postId) => {
+    try {
+      await axios.put(`${process.env.REACT_APP_BASE_URL}/posts/${postId}/views`);
+    } catch (error) {
+      console.error('Failed to increment view count:', error);
+    }
+  };
+
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -41,10 +50,9 @@ const PopularPosts = () => {
               <div className='popular-post-thumbnail'>
                 <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${post.thumbnail}`} alt={post.title} />
               </div>
-              <Link to={`/posts/${post._id}`}>
-                <h3 style={{ textAlign: "center" }} dangerouslySetInnerHTML={truncateTextToHTML(post.title, 30)} />
+              <Link to={`/posts/${post._id}`} onClick={() => handleTitleClick(post._id)}>
+                <h3 style={{ textAlign: "center" }} dangerouslySetInnerHTML={truncateTextToHTML(post.title, 50)} />
               </Link>
-              <h4 dangerouslySetInnerHTML={truncateTextToHTML(post.author, 30)} />
               <Link to={`/posts/categories/${post.category}`}>
                 <p 
                   style={{
@@ -61,7 +69,7 @@ const PopularPosts = () => {
                 </p>
               </Link>
               <p dangerouslySetInnerHTML={truncateTextToHTML(post.description, 145)} />
-              <div className="popular-post-footer" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
+              <div className="popular-post-footer">
                 <p style={{ color: "#EE70BC", fontWeight: "bold" }}>{`Likes: ${post.likes}`}</p>
                 <p style={{ color: "#EE70BC", fontWeight: "bold" }}>{`Comments: ${post.comments.length}`}</p>
               </div>
