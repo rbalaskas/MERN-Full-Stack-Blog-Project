@@ -1,0 +1,116 @@
+.report-a-problem {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .report-a-problem h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .report-a-problem form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .report-a-problem select, 
+  .report-a-problem textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+    resize: vertical;
+  }
+  
+  .report-a-problem select:focus, 
+  .report-a-problem textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .report-a-problem .submit-button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s;
+  }
+  
+  .report-a-problem .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .report-a-problem .submit-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .report-a-problem p {
+    text-align: center;
+    font-size: 18px;
+    color: green;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .report-a-problem {
+      padding: 15px;
+      margin: 30px auto;
+    }
+  
+    .report-a-problem h2 {
+      font-size: 20px;
+    }
+  
+    .report-a-problem select, 
+    .report-a-problem textarea {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .report-a-problem .submit-button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .report-a-problem {
+      padding: 10px;
+      margin: 20px auto;
+    }
+  
+    .report-a-problem h2 {
+      font-size: 18px;
+    }
+  
+    .report-a-problem select, 
+    .report-a-problem textarea {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .report-a-problem .submit-button {
+      font-size: 12px;
+      padding: 8px;
+    }
+  }
+  

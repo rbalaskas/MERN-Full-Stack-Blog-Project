@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import PostAuthor from '../components/PostAuthor';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Loader from '../components/Loader';
 import DeletePost from './DeletePost';
 import { UserContext } from '../context/userContext';
@@ -8,6 +8,9 @@ import axios from 'axios';
 import { format, isValid } from 'date-fns';
 import '../index.css';
 import '../css/PostDetail.css';
+import ReportProblem from './ReportProblem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -20,6 +23,7 @@ const PostDetail = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [commentSubmitted, setCommentSubmitted] = useState(false);
+  const navigate = useNavigate(); 
   const token = currentUser?.token;
 
   useEffect(() => {
@@ -116,8 +120,6 @@ const PostDetail = () => {
     }
   };
   
-  
-  
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -148,6 +150,16 @@ const PostDetail = () => {
     return <Loader />;
   }
 
+  const handleReportClick = () => {
+    navigate(`/report-a-problem?postId=${id}`); // Navigate to the report-a-problem page with the post ID
+  };
+
+  const handleReportCommentClick = (commentId) => {
+    navigate(`/report-a-problem?postId=${id}&commentId=${commentId}`); // Include the postId and commentId in the query params
+  };
+  
+
+
   return (
     <section className="post-detail" style={{ marginTop: '10rem', marginBottom: '5rem' }}>
       {error && <p className="error">Error loading post.</p>}
@@ -164,13 +176,23 @@ const PostDetail = () => {
               </div>
             )}
           </div>
-          <h1>{post.title}</h1>
+          <div className="post-detail__title-container">
+            <h1 className="post-detail__title">{post.title}</h1>
+            <FontAwesomeIcon
+              icon={faFlag}
+              style={{ color: '#ff0000', marginLeft: '10px', cursor: 'pointer' }}
+              onClick={handleReportClick} // Handle click to navigate to the report form
+              title="Report a Problem"
+              alt='Report a Problem'
+            />
+          </div>
           <div className="post-detail__thumbnail">
             <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${post.thumbnail}`} alt="post thumbnail" />
           </div>
           <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
         </div>
       )}
+
       <div className="like-and-comment">
         <div className="like-share-buttons">
           <button onClick={handleLike} className={`btn like-button ${isLiked ? 'liked' : ''}`}>
@@ -183,16 +205,25 @@ const PostDetail = () => {
         <div className="comments-section">
           <h3>Comments</h3>
           <ul className="comments-list">
-            {comments.map((comment, index) => (
-              <li key={index} className="comment-item">
-                <small style={{color:'darkgray',fontSize:'12px'}} className="comment-metadata">
-                  <span style={{fontWeight:'bold'}}>{comment.userName}</span><br/>
-                  <span>{comment.createdAt}</span>
-                </small>
-                <p className="comment-content">{comment.content}</p>
-              </li>
-            ))}
-          </ul>
+              {comments.map((comment) => (
+                <li key={comment._id} className="comment-item">
+                  <small style={{ color: 'darkgray', fontSize: '12px' }} className="comment-metadata">
+                    <span style={{ fontWeight: 'bold' }}>{comment.userName}</span>
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faFlag}
+                        style={{ color: '#ff0000', marginLeft: '10px', cursor: 'pointer' }}
+                        onClick={() => handleReportCommentClick(comment._id)} // Pass comment._id to the function
+                        title="Report a Problem"
+                        alt='Report a Problem'
+                      />
+                    </span><br/>
+                    <span>{comment.createdAt}</span>
+                  </small>
+                  <p className="comment-content">{comment.content}</p>
+                </li>
+              ))}
+            </ul>
           <form onSubmit={handleCommentSubmit} className="comment-form">
             <textarea
               value={newComment}

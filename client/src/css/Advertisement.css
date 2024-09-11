@@ -82,7 +82,7 @@
 .business-image {
   width: 100%;
   height: 200px; /* Adjust image height as needed */
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .business-details {

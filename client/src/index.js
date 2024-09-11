@@ -22,6 +22,7 @@ import FAQ from './pages/FAQ';
 import Support from './pages/Support';
 import VerifyEmailComponent from './pages/VerifyEmailComponent';
 import TermsAndConditions from './pages/TermsAndConditions';
+import ReportProblem from './pages/ReportProblem';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,8 @@ const router = createBrowserRouter([
       {path: "FAQ", element:<FAQ/>},
       {path: "Support", element:<Support/>},
       {path: "verify-email", element:<VerifyEmailComponent/>},
-      {path: "termsandconditions", element:<TermsAndConditions/>}
+      {path: "termsandconditions", element:<TermsAndConditions/>},
+      {path: "report-a-problem", element:<ReportProblem/>}
     ]
   }
 ])

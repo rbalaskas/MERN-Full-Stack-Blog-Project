@@ -125,6 +125,23 @@
   width: 90%;
 }
 
+.post-detail__title-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Adjust spacing as needed */
+}
+
+.post-detail__title {
+  margin: 0;
+  font-size: 2rem; /* Adjust font size as needed */
+  flex: 1; /* Allows the title to take available space */
+}
+
+.post-detail__title-container .fa-flag {
+  font-size: 1.5rem; /* Adjust icon size as needed */
+}
+
+
 /* Tablet Styles */
 @media (max-width: 1024px) {
   .post-detail {

@@ -44,7 +44,7 @@ const Advertisement = () => {
     }
 
     setNotification({ message: '', type: '' });
-    setLoading(true); // Set loading to true
+    setLoading(true);
 
     emailjs.sendForm(
       process.env.REACT_APP_EMAILJS_SERVICE_ID,
