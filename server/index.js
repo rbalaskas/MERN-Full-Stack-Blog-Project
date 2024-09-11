@@ -3,6 +3,7 @@ const cors = require('cors');
 const { connect } = require('mongoose');
 require('dotenv').config();
 const upload = require('express-fileupload');
+const path = require('path');
 
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
@@ -39,10 +40,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(upload());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
+// API routes
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/subscribers', subscriberRoutes);
+
+// Serve static files from the React app
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+
+  // Redirect all other routes to the React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
 app.use(notFound);
 app.use(errorHandler);
 
