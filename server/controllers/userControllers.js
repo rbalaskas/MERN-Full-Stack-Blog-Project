@@ -288,14 +288,12 @@ const verifyEmail = async (req, res, next) => {
         user.isVerified = true;
         await user.save();
 
-        // Redirect to frontend verification page
-        return res.redirect(`${process.env.BASE_URL_FRONTEND}/verify-email?token=${token}`);
+        res.status(200).json({ message: "Email successfully verified." });
     } catch (error) {
         console.error("Unexpected error:", error);
         return res.status(500).json({ message: "An unexpected error occurred.", error: error.message });
     }
 };
-
 
 
 
