@@ -1,29 +1,24 @@
-// utils/sendEmail.js
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // e.g., 'gmail', 'yahoo', etc.
+  service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: 'okoutsompolis.contact@gmail.com',
+    pass: 'cftd muam cfka ntlj',
   },
 });
 
-const sendEmail = async (to, subject, html) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to,
-    subject,
-    html,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully');
-  } catch (error) {
-    console.error('Error sending email:', error);
-    throw new Error('Failed to send email');
-  }
+const mailOptions = {
+  from: 'okoutsompolis.contact@gmail.com',
+  to: 'balaskas1911@gmail.com',
+  subject: 'Test Email',
+  text: 'This is a test email.',
 };
 
-module.exports = sendEmail;
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+    console.error('Error:', error);
+  } else {
+    console.log('Email sent:', info.response);
+  }
+});
