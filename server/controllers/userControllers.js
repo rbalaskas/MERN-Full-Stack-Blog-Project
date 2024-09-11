@@ -47,7 +47,7 @@ const registerUser = async (req, res, next) => {
         });
 
         // Send verification email
-        const verifyLink = `${process.env.BASE_URL}/users/verify-email?token=${verifyEmailToken}`;
+        const verifyLink = `${process.env.BASE_URL}/verify-email?token=${verifyEmailToken}`;
         
         // Prepare HTML content for the email
         const htmlContent = `
@@ -69,7 +69,7 @@ const registerUser = async (req, res, next) => {
             <p style="font-size: 16px;">Best regards,<br>O Koutsompolis</p>
             <hr style="margin: 20px 0;">
             <p style="font-size: 14px; color: #777;">
-                Need help? <a href="${process.env.BASE_URL_FRONTEND}/support" style="color: #2a9d8f;">Contact our support team</a>.
+                Need help? <a href="${process.env.BASE_URL_FRONTEND}/Support" style="color: #2a9d8f;">Contact our support team</a>.
             </p>
         </div>
         `;
