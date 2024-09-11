@@ -47,13 +47,13 @@ const registerUser = async (req, res, next) => {
         });
 
         // Send verification email
-        const verifyLink = `${process.env.BASE_URL}/verify-email?token=${verifyEmailToken}`;
+        const verifyLink = `${process.env.BASE_URL}/users/verify-email?token=${verifyEmailToken}`;
         
         // Prepare HTML content for the email
         const htmlContent = `
         <div style="font-family: Arial, sans-serif; color: #333; text-align: center;">
             <div style="padding: 20px;">
-                <img src="${process.env.BASE_URL}/images/O%20koutsompolis.png" alt="O Koutsompolis Logo" style="width: 150px; height: auto; margin-bottom: 20px;">
+                <img src="${process.env.BASE_URL_FRONTEND}/images/O%20koutsompolis.png" alt="O Koutsompolis Logo" style="width: 150px; height: auto; margin-bottom: 20px;">
             </div>
             <h2 style="color: #2a9d8f;">Email Verification</h2>
             <p style="font-size: 16px;">Hello <strong>${name}</strong>,</p>
@@ -69,7 +69,7 @@ const registerUser = async (req, res, next) => {
             <p style="font-size: 16px;">Best regards,<br>O Koutsompolis</p>
             <hr style="margin: 20px 0;">
             <p style="font-size: 14px; color: #777;">
-                Need help? <a href="${process.env.BASE_URL}/support" style="color: #2a9d8f;">Contact our support team</a>.
+                Need help? <a href="${process.env.BASE_URL_FRONTEND}/support" style="color: #2a9d8f;">Contact our support team</a>.
             </p>
         </div>
         `;
