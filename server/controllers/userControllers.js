@@ -47,7 +47,7 @@ const registerUser = async (req, res, next) => {
         });
 
         // Send verification email
-        const verifyLink = `${process.env.BASE_URL}/api/users/verify-email?token=${verifyEmailToken}`;
+        const verifyLink = `${process.env.BASE_URL_FRONTEND}/verify-email?token=${verifyEmailToken}`;
 
         // Prepare HTML content for the email
         const htmlContent = `
