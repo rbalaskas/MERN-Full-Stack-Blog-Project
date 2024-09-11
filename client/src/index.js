@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {path: "register", element:<Register/>},
       {path: "advertisment", element:<Advertisement/>},
       {path: "FAQ", element:<FAQ/>},
-      {path: "Support", element:<Support/>},
+      {path: "support", element:<Support/>},
       {path: "verify-email", element:<VerifyEmailComponent/>},
       {path: "termsandconditions", element:<TermsAndConditions/>},
       {path: "report-a-problem", element:<ReportProblem/>}
