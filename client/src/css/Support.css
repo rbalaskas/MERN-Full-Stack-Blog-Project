@@ -1,6 +1,6 @@
 .support-page {
-    width: 100%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 700px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -41,7 +41,7 @@
   .support-page button {
     padding: 10px 20px;
     font-size: 1rem;
-    background-color: #000000;
+    background-color: var(--color-primary);
     color: white;
     border: none;
     border-radius: 10px;

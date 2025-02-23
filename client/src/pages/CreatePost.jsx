@@ -78,8 +78,8 @@ const CreatePost = () => {
   };
 
   return (
-    <section className="create-post" style={{ marginTop: '7rem', marginBottom: '5rem' }}>
-      <div className="container">
+    <section className="create-post" style={{ marginTop: '9rem', marginBottom: '11rem' }}>
+      <div className="container create__post">
         <h2>Create Post</h2>
         {error && <div className='form__error-message'>{error}</div>}
         <form className="form create-post__form" onSubmit={createPost}>

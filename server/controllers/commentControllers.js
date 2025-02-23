@@ -71,7 +71,6 @@ const addComment = async (req, res) => {
   
     try {
       const comments = await Comment.find({ postId });
-      console.log(comments);
       res.status(200).json(comments);
     } catch (error) {
       console.error(error);

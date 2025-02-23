@@ -1,5 +1,69 @@
-.ql-editor{
-    overflow: scroll;
-    background: var(--color-white);
-    height: 12rem !important;
+/* Base styles */
+.ql-editor {
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--color-white);
+  height: 15rem !important; /* Fixed height */
+  max-height: 15rem !important; /* Ensure fixed height */
+  width: 100% !important; /* Force 100% width */
+  max-width: 100% !important; /* Ensure it doesn't exceed container */
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+.ql-container {
+  height: auto !important; /* Allow container to adjust to editor height */
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.ql-editor p {
+  width: 100% !important;
+}
+
+.form {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+input, select, textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-1);
+  background: rgb(194, 194, 194);
+}
+
+/* Tablets (up to 768px) */
+@media (max-width: 768px) {
+  .form {
+    padding: 1.5rem;
+  }
+
+  .ql-editor {
+    max-width: 100% !important;
+  }
+}
+
+/* Phones (up to 480px) */
+@media (max-width: 480px) {
+  .form {
+    padding: 1rem;
+  }
+
+  input, select, textarea {
+    font-size: 0.9rem;
+  }
+
+  .create__post h2 {
+    font-size: 1.2rem;
+  }
+
+  .ql-editor {
+    height: 12rem !important; /* Slightly smaller fixed height for mobile */
+    max-height: 12rem !important;
+  }
 }

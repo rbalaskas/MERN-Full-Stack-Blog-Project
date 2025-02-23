@@ -35,7 +35,7 @@ const CategoryPosts = () => {
         <section className='posts' style={{ marginTop: "10rem", marginBottom: "5rem" }}>
             <h3 className="breadcrumb">
                 <Link to='/'>Categories</Link>
-                <span className="separator"> > </span>
+                <span className="separator"></span>
                 {category}
             </h3>
             {posts.length > 0 ? (

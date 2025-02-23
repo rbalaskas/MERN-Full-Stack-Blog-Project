@@ -13,7 +13,6 @@ const updateLeaderboard = async () => {
 
     // Update the leaderboard cache
     leaderboardCache = sortedUsers;
-    console.log('Updated Leaderboard Cache:', leaderboardCache);
     console.log('Leaderboard updated successfully.');
   } catch (error) {
     console.error('Error updating leaderboard:', error);

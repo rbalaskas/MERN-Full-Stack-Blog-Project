@@ -90,8 +90,8 @@ const Register = () => {
             <input type="checkbox" checked={agreed} onChange={handleCheckboxChange} />
           </label>
           <button type="submit" className='btn primary'>Sign up</button>
+          <small>Already have an account? <Link to='/login'>Sign in</Link></small>
         </form>
-        <small>Already have an account? <Link to='/login'>Sign in</Link></small>
       </div>
     </section>
   );

@@ -298,18 +298,14 @@ const incrementViewCountPost = async (req, res) => {
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
-        console.log("before : " + post.views);
         post.views += 1;
-        console.log("after : " + post.views);
 
         await post.save();
     
 
         const user = await User.findById(post.creator);
         if (user) {
-            console.log("user total views before : " +  user.totalviews);
             user.totalviews += 1;
-            console.log("user total views after : " +  user.totalviews);
             await user.save();
         }
         // Return the updated post

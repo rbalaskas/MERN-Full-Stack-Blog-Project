@@ -48,8 +48,8 @@ const Login = () => {
           <input type="email" placeholder='Email' name='email' value={userData.email} onChange={changeInputHandler} autoFocus/>
           <input type="password" placeholder='Password' name='password' value={userData.password} onChange={changeInputHandler} />
           <button type="submit" className='btn primary'>Sign in</button>
+          <small>Don't have an account? <Link to='/register'>Sign up</Link></small>
         </form>
-        <small>Don't have an account? <Link to='/register'>Sign up</Link></small>
       </div>
     </section>
   );

@@ -1,15 +1,23 @@
- .form{
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
- }
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Center items horizontally */
+  gap: 0.8rem;
+  background: white;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;  /* Add a max-width for larger screens */
+  margin: 0 auto;  /* Center the form horizontally on the page */
+}
 
- input, select, textarea{
-    width: 100%;
-    padding: 0.6rem 1rem;
-    border-radius: var(--radius-1);
-    resize: none;
- }
+input, select, textarea {
+  width: 100%;  /* Make inputs full width of their container */
+  max-width: 300px;  /* Limit maximum width */
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-1);
+  resize: none;
+  background: rgb(194, 194, 194);
+}
 
  .form__error-message{
     background: var(--color-red);
@@ -31,6 +39,15 @@
 
 .register h2, .login h2, .create-post h2{
     margin-bottom: 2rem;
+    background: linear-gradient(181deg, #6f6af8 0%, #fa4fd8 48%, #ffadef 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Center items horizontally */
+    gap: 0.8rem;
+    padding: 10px;
+    width: 100%;
+    max-width: 1400px;  /* Add a max-width for larger screens */
+    margin: 0 auto;  /* Center the form horizontally on the page */
 }
 
 .registe small, .login small{
@@ -86,19 +103,48 @@
    text-decoration: underline;
  }
  
- @media only screen and (max-width: 600px) {
-   .terms-checkbox {
-      display: inline-block;
-      align-items: center;
-      margin-bottom: 1rem;
-      justify-content: center; /* Center the checkbox and text */
-      font-size: 10px;
-    }
-    
-    .terms-checkbox input {
-      display: block;
-      margin-left: 2rem;
-      margin-top: -1rem;
-    }
- }
+@media only screen and (max-width: 768px) {
+  .register {
+    max-width: 90%;
+  }
+
+  .form {
+    padding: 1.5rem;
+  }
+
+  .terms-checkbox {
+    font-size: 0.8rem;
+  }
+  .register h2, .login h2, .create-post h2{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 768px;
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .register {
+    max-width: 100%;
+  }
+
+  .form {
+    padding: 1rem;
+  }
+
+  input, select, textarea, .btn {
+    font-size: 0.9rem;
+  }
+
+  .terms-checkbox {
+    font-size: 0.7rem;
+  }
+
+  .register h2, .login h2, .create-post h2{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 480px;
+    padding: 10px;
+  }
+}
 
