@@ -19,7 +19,8 @@ const app = express();
 // CORS configuration
 const allowedOrigins = [
   'http://localhost:3000', // Local development
-  'https://okoutsompolis-frontend.onrender.com' // Deployed frontend
+  'https://okoutsompolis-frontend.onrender.com',
+  'http://46.202.152.141:3000' // Deployed frontend
 ];
 
 const corsOptions = {
