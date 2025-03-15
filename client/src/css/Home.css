@@ -1,65 +1,81 @@
 .home {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center;
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-    width: 100%;
-  }
-  
-  .home__banner {
-    width: 95%;
-    height: auto;
-    margin-bottom: 5rem;
-    display: flex; /* Added to center the image */
-    justify-content: center; /* Added to center the image */
-  }
-  
-  .home__banner img {
-    width: 100%;
-    height: auto;
-    object-fit: contain; /* Ensures the image fits within the banner area */
-  }
-  
-  .home__section-title {
-    position: relative;
-    display: inline-block;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-size: 1.5em;
-    color: #333;
-    z-index: 1;
-    padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+
+/* Modern banner styling */
+.home__banner {
+  width: 90%; /* Slightly smaller for a sleek look */
+  height: auto;
+  margin-top: 1.5rem; /* Reduced spacing for a balanced look */
+  margin-bottom: 4rem; /* Reduced bottom margin for a modern feel */
+  display: flex;
+  justify-content: center;
+  border-radius: 15px; /* Smooth rounded edges for a modern touch */
+  overflow: hidden; /* Ensures no weird image overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.home__banner img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Section title styling */
+.home__section-title {
+  position: relative;
+  display: inline-block;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.6em; /* Slightly larger */
+  color: #333;
+  z-index: 1;
+  padding: 0 12px;
+  font-weight: 600; /* Modern bold look */
+  letter-spacing: 0.5px;
 }
 
 .home__section-title::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(90deg, #F2D0F2, #ff96ff); /* Your gradient or image */
-    width: 130%; /* Increase the width to make it bigger */
-    height: 2.5rem; /* Increase the height to make it bigger */
-    z-index: -1;
-    border-radius: 10px;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, #F2D0F2, #ff96ff);
+  width: 140%; /* Slightly bigger */
+  height: 3rem; /* Taller */
+  z-index: -1;
+  border-radius: 12px;
 }
-  
-  
-  @media only screen and (max-width: 600px) {
-    .home__banner {
+
+/* Responsive design */
+@media only screen and (max-width: 600px) {
+  .home__banner {
       width: 95%;
-      height: 350px;
-      margin-bottom: 5rem;
-      display: flex; /* Added to center the image */
-      justify-content: center; /* Added to center the image */
-    }
-    
-    .home__banner img {
-      width: 100%;
-      height: 100%; /* Update to height: 350px; for consistent height */
-      object-fit: cover; /* Ensures the image covers the banner area */
-      zoom: -25%;
-    }
+      height: auto;
+      margin-top: 0.5rem; /* Reduced top space */
+      margin-bottom: 3rem; /* Adjusted for better spacing */
+      border-radius: 10px; /* Maintain a modern feel */
   }
-  
+
+  .home__banner img {
+      width: 100%;
+      height: auto;
+      object-fit: contain; /* Ensures full image is visible */
+  }
+
+  .home__section-title {
+      font-size: 1.4em; /* Slightly smaller for mobile */
+      margin-top: 1.5rem;
+  }
+
+  .home__section-title::before {
+      width: 120%;
+      height: 2.5rem;
+  }
+}
