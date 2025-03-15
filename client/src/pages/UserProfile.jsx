@@ -122,7 +122,9 @@ const UserProfile = () => {
   return (
     <section className="profile" style={{ marginTop: "10rem", marginBottom: "5rem" }}>
       <div className="container profile__container">
-        <Link to={`/myposts/${currentUser.userId}`} className='bt'>My Posts</Link>
+      <Link to={`/myposts/${currentUser.userId}`} className='about-us__cta'>
+        <button className="about-us__cta-button">My Posts</button>
+      </Link>
         <div className="profile__details">
           <div className="avatar__wrapper">
             <div className="profile__avatar">

@@ -14,7 +14,7 @@ const Footer = () => {
         <li><Link to="/posts/categories/Cyprus">Cyprus</Link></li>
       </ul>
       <div className="footer__advertise">
-        <Link to="/advertisment">Advertisement</Link>
+        {/* <Link to="/advertisment">Advertisement</Link> */}
         <Link to="/FAQ">FAQ</Link>
         <Link to="/support">Support</Link>
       </div><br/>

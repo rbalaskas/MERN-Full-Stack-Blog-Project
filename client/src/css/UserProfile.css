@@ -8,6 +8,30 @@
     width:100%;
 }
 
+
+.about-us__cta-button {
+    background: linear-gradient(90deg, #F2D0F2, #ff96ff);
+    color: #333;
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(242, 150, 255, 0.2);
+}
+
+.about-us__cta-button:hover {
+    background: linear-gradient(90deg, #ff96ff, #F2D0F2); /* Reverse gradient on hover */
+}
+
+.about-us__cta-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(242, 150, 255, 0.5);
+}
+
+
 .avatar__wrapper{
     width: 15rem;
     aspect-ratio: 1/1;
