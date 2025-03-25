@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../css/Register.css';
-import '../index.css';
+import '../css/Login.css';
+// import '../index.css';
 import axios from 'axios';
 import { UserContext } from './../context/userContext.js';
 
@@ -42,8 +42,9 @@ const Login = () => {
   return (
     <section className="login" style={{marginTop:"10rem",marginBottom:"5rem"}}>
       <div className="container">
-        <h2>Sign in</h2>
+        
         <form className="form login__form" onSubmit={loginUser}>
+          <h2>Sign in</h2>
           {error && <p className={`form__error-message ${error ? 'verify-email-error' : ''}`}>{error}</p>}
           <input type="email" placeholder='Email' name='email' value={userData.email} onChange={changeInputHandler} autoFocus/>
           <input type="password" placeholder='Password' name='password' value={userData.password} onChange={changeInputHandler} />

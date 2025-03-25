@@ -139,6 +139,7 @@ const getUser = async (req,res,next) =>{
     try{
         const {id} = req.params;
         const user = await User.findById(id).select('-password');
+        
         if(!user){
             return next(new HttpError("User not found.",404));
         }

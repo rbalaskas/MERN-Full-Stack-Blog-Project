@@ -42,10 +42,10 @@ const Register = () => {
     e.preventDefault();
     setError('');
 
-    if (!agreed) {
-      setError('You must agree to the terms and conditions.');
-      return;
-    }
+    // if (!agreed) {
+    //   setError('You must agree to the terms and conditions.');
+    //   return;
+    // }
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, userData);
@@ -70,25 +70,45 @@ const Register = () => {
     }
   };
 
-  const handleCheckboxChange = (e) => {
-    setAgreed(e.target.checked);
-    localStorage.setItem('agreed', JSON.stringify(e.target.checked));
-  };
+  // const handleCheckboxChange = (e) => {
+  //   setAgreed(e.target.checked);
+  //   localStorage.setItem('agreed', JSON.stringify(e.target.checked));
+  // };
 
   return (
     <section className="register" style={{ marginTop: "10rem", marginBottom: "5rem" }}>
       <div className="container">
-        <h2>Sign up</h2>
         <form className="form register__form" onSubmit={registerUser}>
+          <h2>Sign up</h2>
           {error && <p className={`form__error-message ${error ? 'verify-email-error' : ''}`}>{error}</p>}
           <input type="text" placeholder='Full Name' name='name' value={userData.name} onChange={changeInputHandler} autoFocus />
           <input type="email" placeholder='Email' name='email' value={userData.email} onChange={changeInputHandler} />
           <input type="password" placeholder='Password' name='password' value={userData.password} onChange={changeInputHandler} />
           <input type="password" placeholder='Confirm Password' name='password2' value={userData.password2} onChange={changeInputHandler} />
-          <label className="terms-checkbox">
-            I agree to the <Link to="/termsandconditions" className="terms-link">Terms and Conditions</Link>
-            <input type="checkbox" checked={agreed} onChange={handleCheckboxChange} />
+          <label
+            className="terms-checkbox"
+            style={{
+              fontSize: "8px",
+              display: "flex",
+              alignItems: "center",
+              whiteSpace: "nowrap",
+              gap: "2px", // Small gap between text and link
+            }}
+          >
+            By registering, you accept our
+            <Link
+              to="/termsandconditions"
+              className="terms-link"
+              style={{
+                fontSize: "8px",
+                marginLeft: "2px", // Ensures a small space after "our"
+                textDecoration: "none",
+              }}
+            >
+              Terms and Conditions
+            </Link>
           </label>
+
           <button type="submit" className='btn primary'>Sign up</button>
           <small>Already have an account? <Link to='/login'>Sign in</Link></small>
         </form>

@@ -100,12 +100,30 @@
 
 
 
-.form.profile__form{
-    margin-top: 3rem;
-    margin-inline: auto;
-    width: var(--form-width);
+.form.profile__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center inputs */
+    max-width: 400px; /* Adjusts the width of the form */
+    width: 100%;
+    margin: auto;
 }
 
+.form.profile__form input {
+    width: 100%; /* Makes input responsive within the form */
+    padding: 0.75rem;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 1rem; /* Space between inputs */
+}
+
+.form.profile__form input:focus {
+    outline: none;
+    border-color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
 
 

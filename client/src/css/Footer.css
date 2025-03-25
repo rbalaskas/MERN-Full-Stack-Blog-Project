@@ -2,22 +2,22 @@
 
 footer {
   background-color: var(--color-gray-900);
-  min-height: 20vh; /* Use min-height instead of height for flexibility */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centers the content vertically */
   align-items: center; /* Centers items horizontally */
   width: 100%;
-  padding: 1rem 0; /* Added padding to ensure content doesn't stick to the edges */
+  padding: 1rem 0;
+  margin-top: auto; /* Pushes the footer to the bottom */
 }
 
 .footer__categories {
   display: flex;
-  justify-content: center; /* Centers the categories horizontally */
+  justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  margin: 1rem auto; /* Center margin with auto */
-  text-align: center; /* Center the list items horizontally */
+  margin: 1rem auto;
+  text-align: center;
 }
 
 .footer__categories a {
@@ -35,13 +35,13 @@ footer {
 
 .footer__advertise {
   text-align: center;
-  margin-top: 1rem; /* Adjust top margin as needed */
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
-  width: auto; /* Adjust width based on content */
-  padding: 10px 20px; /* Adjust padding for better appearance */
+  width: auto;
+  padding: 10px 20px;
 }
 
 .footer__advertise a {
@@ -49,12 +49,12 @@ footer {
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
-  padding-left:10px;
+  padding-left: 10px;
   padding-right: 10px;
 }
 
 .footer__advertise a:hover {
-  color: #6F6AF8; /* Change color on hover */
+  color: #6F6AF8;
 }
 
 .footer__copyright {

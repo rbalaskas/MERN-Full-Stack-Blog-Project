@@ -1,0 +1,102 @@
+/* Login.css - Custom styles for login form */
+
+/* Form container styling */
+.login {
+    width: var(--form-width);
+    margin-inline: auto;
+    height: calc(90vh - 12rem);
+    display: grid;
+    place-items: center;
+  }
+  
+  /* Form styling - with !important to override conflicting styles */
+  .login__form.form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;  
+    gap: 0.8rem !important;
+    background: white !important;
+    padding: 20px !important;
+    width: 70% !important; /* Reduced from 80% */
+    max-width: 500px !important; /* Reduced from 400px */
+    margin: 0 auto !important;  
+  }
+  
+  /* Form heading */
+  .login h2 {
+    margin-bottom: 0.5rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* Input fields - adjusted to be slightly bigger */
+  .login__form input {
+    width: 85% !important; /* Increased from 70% */
+    max-width: 330px !important; /* Increased from 220px */
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-1);
+    resize: none;
+    background: white !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+    appearance: none;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  /* Error message styling */
+  .login__form .form__error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    width: 85%;
+    max-width: 250px;
+    text-align: center;
+  }
+  
+  /* Sign up text */
+  .login small {
+    display: block;
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  
+  .login small a {
+    color: var(--color-primary);
+  }
+  
+  /* Button styling */
+  .login__form .btn {
+    width: 85%;
+    max-width: 250px;
+  }
+  
+  /* Responsive adjustments */
+  @media only screen and (max-width: 768px) {
+    .login__form.form {
+      width: 70% !important;
+      padding: 1.5rem !important;
+    }
+    
+    .login__form input,
+    .login__form .btn {
+      width: 90% !important;
+      max-width: 270px !important;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .login__form.form {
+      width: 85% !important;
+      padding: 1rem !important;
+    }
+    
+    .login__form input,
+    .login__form .btn {
+      width: 95% !important;
+      font-size: 0.9rem;
+    }
+  }

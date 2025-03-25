@@ -10,37 +10,86 @@
   white-space: pre-wrap !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
+  padding: 0.75rem;
 }
 
 .ql-container {
   height: auto !important; /* Allow container to adjust to editor height */
   width: 100% !important;
   max-width: 100% !important;
+  background: white !important; /* White background */
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .ql-editor p {
   width: 100% !important;
 }
 
-.form {
+/* Centering the form */
+.create-post__form {
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 600px; /* Set form width */
+  margin: 0 auto; /* Centering */
   padding: 20px;
+  background: #fff; /* White background */
+  border-radius: 8px; /* Optional rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-input, select, textarea {
+/* Centering the h2 */
+.create-post__form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Styling inputs, select, and file input */
+.create-post__form input,
+.create-post__form select,
+.create-post__form textarea {
   width: 100%;
   max-width: 100%;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-1);
-  background: rgb(194, 194, 194);
+  padding: 0.75rem;
+  margin-bottom: 1rem; /* Space between elements */
+  border: 1px solid #ccc;
+  background: white; /* White background */
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* File input styling */
+.create-post__form input[type="file"] {
+  padding: 8px;
+}
+
+/* Submit button */
+.create-post__form .btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--color-primary); /* Primary color */
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-post__form .btn:hover {
+  background: var(--primary-dark, #000000);
+}
+
+/* Error Message */
+.form__error-message {
+  color: red;
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* Tablets (up to 768px) */
 @media (max-width: 768px) {
-  .form {
-    padding: 1.5rem;
+  .create-post__form {
+    max-width: 90%; /* Make it responsive */
   }
 
   .ql-editor {
@@ -50,7 +99,7 @@ input, select, textarea {
 
 /* Phones (up to 480px) */
 @media (max-width: 480px) {
-  .form {
+  .create-post__form {
     padding: 1rem;
   }
 
@@ -58,7 +107,7 @@ input, select, textarea {
     font-size: 0.9rem;
   }
 
-  .create__post h2 {
+  .create-post__form h2 {
     font-size: 1.2rem;
   }
 

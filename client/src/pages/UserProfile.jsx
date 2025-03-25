@@ -136,7 +136,7 @@ const UserProfile = () => {
             </form>
             {isAvatarTouched && <button className='profile__avatar-btn' onClick={changeAvatarHandle}><FaCheck /></button>}
           </div>
-          <h1>{currentUser.name}</h1>
+          <h1>{currentUser.name}</h1><br/>
           <form  className="form profile__form" onSubmit={updateUserDetails}>
           {error && <p className="form__error-message">{error}</p>}
             <input type="text" placeholder='Full Name' value={name} onChange={e=> setName(e.target.value)}/>
